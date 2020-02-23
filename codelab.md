@@ -15,7 +15,6 @@ In the following tutorial, we'll learn how to make an iOS app.
 The app will have a single view UI, introducing the Current Weather in the user's Current Location.
 The app will interact with Open Weather API, in order to fetch the current weather.
 
-
 **Notes:**
 * The tutorial will focus on Storyboards, Autolayout and UIStackView.
 * The tutorial will include the current weather view only
@@ -43,7 +42,7 @@ This tutorial assumes you have basic familiarity with Xcode, as provided in sepa
 #### Create a new Xcode Project
 
 Open Xcode and select "Create a new Xcode Project"
-![image_caption](https://googlecloud.tips/img/031/codelabs.png)
+*Put here an image caption*
 
 #### Choose a template for your new project with following options:
 * iOS | Single View App

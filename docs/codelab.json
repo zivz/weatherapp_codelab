@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-23T15:12:41+02:00",
+  "id": "docs",
+  "duration": 14,
+  "title": "Creating first iOS App",
+  "summary": "Create iOS App",
+  "source": "codelab.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "codelab",
+    "swift",
+    "ios"
+  ],
+  "tags": [
+    "ios"
+  ],
+  "feedback": "https://github.com/zivz/WeatherApp",
+  "url": "docs"
+}
