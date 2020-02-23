@@ -6,14 +6,27 @@ environments: ios
 status: Published
 feedback link: https://github.com/zivz/WeatherApp
 
-# Creating first iOS App
+# Creating your first iOS App
 
 ## First iOS App Overview
 Duration: 0:01:30
 
 In the following tutorial, we'll learn how to make an iOS app.
-The app will have a single view UI, introducing the Current Weather in the user's Current Location.
-The app will interact with Open Weather API, in order to fetch the current weather.
+
+**General**
+The app will show the user the current weather in its current location.
+
+**UI**
+The UI Will have a single view.
+The primary view will contain two subviews,
+* A view for the current weather
+* A table view for the next 10 days forecast.
+
+**API**
+The app will interact with Open Weather API, in order to fetch the current weather, and the forecast.
+
+**Location**
+The app will fetch the user's location, upon an `In-App Usage` permission 
 
 **Notes:**
 * The tutorial will focus on Storyboards, Autolayout and UIStackView.
