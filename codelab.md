@@ -78,6 +78,27 @@ Once the project is created, The project file will appear on the screen.
 * Verify `Portrait` only, under `Device Orientation`
 ![Project Settings](./assets/Project Settings.png)
 
+## Weather UI Overview
+
+#### UI Components
+Our Primary View will contain 2 Subviews.  
+* Current Weather view
+* Table View with 10 days weather forecast, **which will not be part of this tutorial.**
+
+![WeatherApp Subviews](./assets/TwoViews.png)
+
+#### Current Weather view
+Will be consisted of 2 parts   
+* Part 1  
+  * Current day
+  * Current Temperature in Celsius
+  * Current Location
+* Part 2
+  * An Image of Weather Type
+  * Weather Description
+
+![Current Weather View](./assets/CurrentWeatherView.png)
+
 ## Creating Current Weather UI  
 
 In this section we'll create the Current Weather UI, using Storyboard, Autolayout and StackView.
@@ -99,22 +120,3 @@ From [SwiftLee](https://www.avanderlee.com/swift/auto-layout-programmatically/) 
 From [apple.com](https://developer.apple.com/documentation/uikit/uistackview) - Stack views let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device’s orientation, screen size, and any changes in the available space.
 The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view’s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view’s axis, distribution, alignment, spacing, and other properties.
 <!-- ![Stack view - apple developer](https://docs-assets.developer.apple.com/published/82128953f6/uistack_hero_2x_04e50947-5aa0-4403-825b-26ba4c1662bd.png) -->
-
-#### UI Components
-Our Primary View will contain 2 Subviews.  
-* Current Weather view
-* Table View with 10 days weather forecast, **which will not be part of this tutorial.**
-
-![WeatherApp Subviews](./assets/TwoViews.png)
-
-#### Current Weather view
-Will be consisted of 2 parts   
-* Part 1  
-  * Current day
-  * Current Temperature in Celsius
-  * Current Location
-* Part 2
-  * An Image of Weather Type
-  * Weather Description
-
-![Current Weather View](./assets/CurrentWeatherView.png)
