@@ -25,8 +25,8 @@ The primary view will contain two subviews:
 **API**  
 The app will interact with Open Weather API, in order to fetch the current weather, and the forecast.  
 
-**Location**
-The app will fetch the user's location, upon an `In-App Usage` permission
+**Location**  
+The app will fetch the user's location, upon `When in use authorization` permission
 
 **Notes:**
 * The tutorial will focus on Storyboards, Autolayout and UIStackView.  
@@ -55,7 +55,7 @@ This tutorial assumes you have basic familiarity with Xcode, as provided in sepa
 #### Create a new Xcode Project
 
 Open Xcode and select "Create a new Xcode Project"
-*Put here an image caption*
+**Put here an image caption**
 
 #### Choose a template for your new project with following options:
 * iOS | Single View App
@@ -67,7 +67,7 @@ Open Xcode and select "Create a new Xcode Project"
 * Bundle Identifier - will be constructed from your Product Name and Organization Name.
 * Language - Swift
 * User Interface - Choose Storyboard
-* Leave `User Core Data, Include Unit Tests and Include UI Tests` *Unchecked*
+* Leave `User Core Data, Include Unit Tests and Include UI Tests` **Unchecked**
 
 #### Setup Go Environment Variables
 Below is what I set on mac, but instructions are [here](https://golang.org/doc/install) for other OS options
