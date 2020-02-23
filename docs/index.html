@@ -56,7 +56,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Xcode New Project" duration="4">
+      <google-codelab-step label="Xcode - New Project" duration="4">
         <p>This tutorial assumes you have basic familiarity with Xcode, as provided in separate session.</p>
 <p><strong>Resources:</strong></p>
 <ul>
@@ -78,13 +78,51 @@
 <li>Leave <code>User Core Data, Include Unit Tests and Include UI Tests</code><strong>Unchecked</strong></li>
 </ul>
 <p class="image-container"><img alt="Template Options" src="img/1bb6c1e94adb366e.png"></p>
-<h3 is-upgraded>Verify and Edit Project Settings</h3>
+<h3 is-upgraded>Edit and Verify Project Settings</h3>
 <p>Once the project is created, The project file will appear on the screen. <strong>Under General tab verify the following:</strong></p>
 <ul>
 <li>Verify <code>Display Name, Bundle Identifier</code> are correct under <code>identity</code></li>
 <li>Check <code>iPhone</code> only, under <code>Deployment info</code></li>
 <li>Verify <code>Portrait</code> only, under <code>Device Orientation</code><img alt="Project Settings" src="img/6d51293211bb42b5.png"></li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating Current Weather UI" duration="0">
+        <p>In this section we&#39;ll create the Current Weather UI, using Storyboard, Autolayout and StackView.</p>
+<h3 is-upgraded>Storyboard</h3>
+<p>From <a href="https://www.raywenderlich.com/5055364-ios-storyboards-getting-started" target="_blank">raywanderlich.com</a> - Storyboards are an exciting feature first introduced in iOS 5, which save time building user interfaces for your apps. Storyboards allow you to prototype and design multiple view controller views within one file, and also let you create transitions between view controllers.</p>
+<p>From <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/Devpedia-CocoaApp/Storyboard.html" target="_blank">apple.com</a> - A storyboard is a visual representation of the user interface of an iOS application, showing screens of content and the connections between those screens.</p>
+<h3 is-upgraded>Autolayout</h3>
+<p>From <a href="https://www.raywenderlich.com/811496-auto-layout-tutorial-in-ios-getting-started" target="_blank">raywanderlich.com</a> - At first, Apple made one screen size for the iPhone. Developers didn&#39;t have to create flexible interfaces as they only had to fit that one size. Today, differently sized devices and more emphasis on landscape mode demand user interfaces of different sizes. Auto Layout is Apple&#39;s solution to this problem, enabling UI elements to grow, shrink and move depending on screen size. Auto Layout makes it easy to support different screen sizes in your apps.</p>
+<h3 is-upgraded>Constraints</h3>
+<p>From <a href="https://www.avanderlee.com/swift/auto-layout-programmatically/" target="_blank">SwiftLee</a> - Auto Layout constraints allow us to create views that dynamically adjust to different size classes and positions. The constraints will make sure that your views adjust to any size changes without having to manually update frames or positions</p>
+<h3 is-upgraded>UIStackview</h3>
+<p>From <a href="https://developer.apple.com/documentation/uikit/uistackview" target="_blank">apple.com</a> - Stack views let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device&#39;s orientation, screen size, and any changes in the available space. The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view&#39;s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view&#39;s axis, distribution, alignment, spacing, and other properties. </p>
+<h3 is-upgraded>UI Components</h3>
+<p>Our Primary View will contain 2 Subviews.</p>
+<ul>
+<li>Current Weather view</li>
+<li>Table View with 10 days weather forecast, <strong>which will not be part of this tutorial.</strong></li>
+</ul>
+<p class="image-container"><img alt="WeatherApp Subviews" src="img/bc5e422b731ea0be.png"></p>
+<h3 is-upgraded>Current Weather view</h3>
+<p>Will be consisted of 2 parts</p>
+<ul>
+<li>Part 1<br><ul>
+<li>Current day</li>
+<li>Current Temperature in Celsius</li>
+<li>Current Location</li>
+</ul>
+</li>
+<li>Part 2  <ul>
+<li>An Image of Weather Type</li>
+<li>Weather Description</li>
+</ul>
+</li>
+</ul>
+<p class="image-container"><img alt="Current Weather View" src="img/7bcaab022afac85c.png"></p>
 
 
       </google-codelab-step>
