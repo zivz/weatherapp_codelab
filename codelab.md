@@ -11,30 +11,30 @@ feedback link: https://github.com/zivz/WeatherApp
 ## First iOS App Overview
 Duration: 0:01:30
 
-In the following tutorial, we'll learn how to make an iOS app.
+In the following tutorial, we'll learn how to make an iOS app.  
 
 **General**
-The app will show the user the current weather in its current location.
+The app will show the user the current weather in its current location.  
 
-**UI**
-The UI Will have a single view.
-The primary view will contain two subviews,
+**UI**  
+The UI Will have a single view.  
+The primary view will contain two subviews:  
 * A view for the current weather
 * A table view for the next 10 days forecast.
 
-**API**
-The app will interact with Open Weather API, in order to fetch the current weather, and the forecast.
+**API**  
+The app will interact with Open Weather API, in order to fetch the current weather, and the forecast.  
 
 **Location**
-The app will fetch the user's location, upon an `In-App Usage` permission 
+The app will fetch the user's location, upon an `In-App Usage` permission
 
 **Notes:**
-* The tutorial will focus on Storyboards, Autolayout and UIStackView.
-* The tutorial will include the current weather view only
-* Location Handler, Networking, Parsing code will be provided in order to provide the full capabilities of the app.
-* The app is extendable for further implementation of the next 10 days forecast.
-* Tableview displaying the forecast for the next 10 days implementation is still available in github.
-* The full code is available [here](https://github.com/zivz/WeatherApp).
+* The tutorial will focus on Storyboards, Autolayout and UIStackView.  
+* The tutorial will include the current weather view only  
+* Location Handler, Networking, Parsing code will be provided in order to provide the full capabilities of the app.  
+* The app is extendable for further implementation of the next 10 days forecast.  
+* Tableview displaying the forecast for the next 10 days implementation is still available in github.  
+* The full code is available [here](https://github.com/zivz/WeatherApp).  
 
 **Resources:**
 * [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/overview/)
