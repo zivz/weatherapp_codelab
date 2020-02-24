@@ -136,13 +136,16 @@ Negative
 : As Stack Views are really confusing in the beginning, play with the different options,
 other than those suggested in the paragraph below, In order to notice the difference.
 
-#### The Green Stack View Properties
+#### The Red Stack View Properties
 * Axis - As Our elements are stacked vertically, we'll choose `Vertical`.
 * Alignment - We'd like our elements to fill the container, we'll choose `Fill`.
 * Distribution - We'd like our elements to be distributed as a proportions of their label size, hence we'll choose `Fill Proportionally`.
 * Spacing - is redundant here since Our Distribution defines the way the items will be spaced.
 
-#### The Red Stack View properties
+![Info Stack View](./assets/Info Stack View Attributes.png)
+
+#### The Green Stack View properties
 * Axis - As our elements are stacked vertically, we'll choose `Vertical`.
 * Alignment - We'd like our elements to be in the Center of the container, we'll choose `Center`.
 * Distribution - We'd like our elements to be vertically stretched in the container, hence, we'll choose `Fill`.
+![Image Stack View](./assets/Image Stack View Attributes.png)
