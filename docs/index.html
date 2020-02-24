@@ -118,7 +118,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Creating Current Weather UI" duration="0">
+      <google-codelab-step label="Current Weather UI Terminology" duration="0">
         <p>In this section we&#39;ll create the Current Weather UI, using Storyboard, Autolayout and StackView.</p>
 <h3 is-upgraded>Storyboard</h3>
 <p>From <a href="https://www.raywenderlich.com/5055364-ios-storyboards-getting-started" target="_blank">raywanderlich.com</a> - Storyboards are an exciting feature first introduced in iOS 5, which save time building user interfaces for your apps. Storyboards allow you to prototype and design multiple view controller views within one file, and also let you create transitions between view controllers.</p>
@@ -129,6 +129,29 @@
 <p>From <a href="https://www.avanderlee.com/swift/auto-layout-programmatically/" target="_blank">SwiftLee</a> - Auto Layout constraints allow us to create views that dynamically adjust to different size classes and positions. The constraints will make sure that your views adjust to any size changes without having to manually update frames or positions</p>
 <h3 is-upgraded>UIStackview</h3>
 <p>From <a href="https://developer.apple.com/documentation/uikit/uistackview" target="_blank">apple.com</a> - Stack views let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device&#39;s orientation, screen size, and any changes in the available space. The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view&#39;s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view&#39;s axis, distribution, alignment, spacing, and other properties. <img alt="Stack view - Apple developer" src="img/580d5a03d8d3c6d1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating The Stackviews" duration="0">
+        <p>As specified in Weather UI overview, the current weather UI will be consisted of two views. Those Views are marked in the image below in red, and green.</p>
+<p class="image-container"><img alt="Current Weather View" title="Current Weather View" src="img/7bcaab022afac85c.png"></p>
+<p>Using Stack Views will ease our development process, simplify our constraints logic and will be easier if we&#39;ll want to make changes in our UI in the future. Using Stack Views comes naturally as one view, can be &#34;treated&#34; as an array of 3 vertical elements, while the other has 2 vertical elements.</p>
+<aside class="warning"><p>As Stack Views are really confusing in the beginning, play with the different options, other than those suggested in the paragraph below, In order to notice the difference.</p>
+</aside>
+<h3 is-upgraded>The Green Stack View Properties</h3>
+<ul>
+<li>Axis - As Our elements are stacked vertically, we&#39;ll choose <code>Vertical</code>.</li>
+<li>Alignment - We&#39;d like our elements to fill the container, we&#39;ll choose <code>Fill</code>.</li>
+<li>Distribution - We&#39;d like our elements to be distributed as a proportions of their label size, hence we&#39;ll choose <code>Fill Proportionally</code>.</li>
+<li>Spacing - is redundant here since Our Distribution defines the way the items will be spaced.</li>
+</ul>
+<h3 is-upgraded>The Red Stack View properties</h3>
+<ul>
+<li>Axis - As our elements are stacked vertically, we&#39;ll choose <code>Vertical</code>.</li>
+<li>Alignment - We&#39;d like our elements to be in the Center of the container, we&#39;ll choose <code>Center</code>.</li>
+<li>Distribution - We&#39;d like our elements to be vertically stretched in the container, hence, we&#39;ll choose <code>Fill</code>.</li>
+</ul>
 
 
       </google-codelab-step>

@@ -100,7 +100,7 @@ Will be consisted of 2 parts
 
 ![Current Weather View](./assets/CurrentWeatherView.png)
 
-## Creating Current Weather UI  
+## Current Weather UI Terminology
 
 In this section we'll create the Current Weather UI, using Storyboard, Autolayout and StackView.
 
@@ -121,3 +121,28 @@ From [SwiftLee](https://www.avanderlee.com/swift/auto-layout-programmatically/) 
 From [apple.com](https://developer.apple.com/documentation/uikit/uistackview) - Stack views let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device’s orientation, screen size, and any changes in the available space.
 The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view’s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view’s axis, distribution, alignment, spacing, and other properties.
 ![Stack view - Apple developer](./assets/Apple StackView.png)
+
+## Creating The Stackviews
+
+As specified in Weather UI overview, the current weather UI will be consisted of two views.
+Those Views are marked in the image below in <font color="red">red</font>, and <font color="green">green</font>.
+
+![Current Weather View](./assets/CurrentWeatherView.png "Current Weather View")
+
+Using Stack Views will ease our development process, simplify our constraints logic and will be easier if we'll want to make changes in our UI in the future.
+Using Stack Views comes naturally as one view, can be "treated" as an array of 3 vertical elements, while the other has 2 vertical elements.
+
+Negative
+: As Stack Views are really confusing in the beginning, play with the different options,
+other than those suggested in the paragraph below, In order to notice the difference.
+
+#### The Green Stack View Properties
+* Axis - As Our elements are stacked vertically, we'll choose `Vertical`.
+* Alignment - We'd like our elements to fill the container, we'll choose `Fill`.
+* Distribution - We'd like our elements to be distributed as a proportions of their label size, hence we'll choose `Fill Proportionally`.
+* Spacing - is redundant here since Our Distribution defines the way the items will be spaced.
+
+#### The Red Stack View properties
+* Axis - As our elements are stacked vertically, we'll choose `Vertical`.
+* Alignment - We'd like our elements to be in the Center of the container, we'll choose `Center`.
+* Distribution - We'd like our elements to be vertically stretched in the container, hence, we'll choose `Fill`.
