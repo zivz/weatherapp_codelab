@@ -57,7 +57,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Xcode - New Project" duration="4">
-        <p>This tutorial assumes you have basic familiarity with Xcode, as provided in separate session.</p>
+        <p>This tutorial assumes you have basic familiarity with Xcode, as provided in a separate session.</p>
 <p><strong>Resources:</strong></p>
 <ul>
 <li><a href="https://apps.apple.com/il/app/xcode/id497799835?mt=12" target="_blank">Download Xcode from App Store</a></li>
@@ -133,11 +133,37 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Creating the basic view" duration="0">
+        <p>As seen in the image capture below, Current Weather View and table view are two separate views in the view hold by the view controller.</p>
+<p class="image-container"><img alt="WeatherApp Subviews" title="Current Weather View and Forecast Table View" src="img/bc5e422b731ea0be.png"></p>
+<p>We&#39;ll create this view and later pile up our detailed UI Elements.</p>
+<p>We&#39;re basically going to add the blue view, holding our detailed UI Elements as in the 3d capture below. <img alt="Current Weather 3D Capture" title="Current Weather 3D Capture" src="img/bb87a7126996f47.png"></p>
+<p>In order to do so, follow the following steps</p>
+<ol type="1">
+<li>open Main.storyboard  <ol type="1">
+<li>You should currently see a View inside the View Controller hierarchy. <img alt="View Controller Scene" title="View Controller Scene" src="img/775024cb69f1b752.png"></li>
+</ol>
+</li>
+<li>Tap on the <code>+</code> Button in the right top corner, in order to reveal the <code>Object Library</code><ol type="1">
+<li>Search for <code>view</code> and drag it beneath the View.</li>
+<li>You should currently have a view inside your previous view. <img alt="Adding a view" title="Adding a view" src="img/868554642207f3ad.png"></li>
+</ol>
+</li>
+</ol>
+<h2 is-upgraded>Setting our view constraints.</h2>
+<aside class="warning"><p>you should currently notice a red arrow indicating there&#39;s a problem with your view since it has no set of rules,<br> or in other words we need to set constraints so <code>Autolayout</code> will figure out where to position the view.</p>
+</aside>
+<p class="image-container"><img alt="Missing Constraints" title="Missing Constraints" src="img/52e11632d7f0d741.png"></p>
+<p>In order for our view to be adaptive, we need to set some rules so it will fit several devices.</p>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Creating The Stackviews" duration="0">
         <p>As specified in Weather UI overview, the current weather UI will be consisted of two views. Those Views are marked in the image below in red, and green.</p>
 <p class="image-container"><img alt="Current Weather View" title="Current Weather View" src="img/7bcaab022afac85c.png"></p>
 <p>Using Stack Views will ease our development process, simplify our constraints logic and will be easier if we&#39;ll want to make changes in our UI in the future. Using Stack Views comes naturally as one view, can be &#34;treated&#34; as an array of 3 vertical elements, while the other has 2 vertical elements.</p>
-<aside class="warning"><p>As Stack Views are really confusing in the beginning, play with the different options, other than those suggested in the paragraph below, In order to notice the difference.</p>
+<aside class="warning"><p>As Stack Views are really confusing in the beginning, play with the different options<br> other than those suggested in the paragraph below, In order to notice the difference.</p>
 </aside>
 <h3 is-upgraded>The Red Stack View Properties</h3>
 <ul>

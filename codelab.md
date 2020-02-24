@@ -44,7 +44,7 @@ The app will fetch the user's location, upon `When in use authorization` permiss
 ## Xcode - New Project
 Duration: 0:04:00
 
-This tutorial assumes you have basic familiarity with Xcode, as provided in separate session.
+This tutorial assumes you have basic familiarity with Xcode, as provided in a separate session.
 
 **Resources:**
 * [Download Xcode from App Store](https://apps.apple.com/il/app/xcode/id497799835?mt=12)
@@ -122,6 +122,36 @@ From [apple.com](https://developer.apple.com/documentation/uikit/uistackview) - 
 The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view’s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view’s axis, distribution, alignment, spacing, and other properties.
 ![Stack view - Apple developer](./assets/Apple StackView.png)
 
+## Creating the basic view
+
+As seen in the image capture below, Current Weather View and table view are two separate views in the view hold by the view controller.
+
+![WeatherApp Subviews](./assets/TwoViews.png "Current Weather View and Forecast Table View")
+
+We'll create this view and later pile up our detailed UI Elements.
+
+We're basically going to add the blue view, holding our detailed UI Elements as in the 3d capture below.
+![Current Weather 3D Capture](./assets/Current Weather 3D.png "Current Weather 3D Capture")
+
+In order to do so, follow the following steps
+1. open Main.storyboard
+  1. You should currently see a View inside the View Controller hierarchy.
+  ![View Controller Scene](./assets/View Controller Scene.png "View Controller Scene")
+2. Tap on the `+` Button in the right top corner, in order to reveal the `Object Library`
+  1. Search for `view` and drag it beneath the View.
+  2. You should currently have a view inside your previous view.
+  ![Adding a view](./assets/Adding a view.png "Adding a view")
+
+### Setting our view constraints.
+
+Negative
+: you should currently notice a red arrow indicating there's a problem with your view since it has no set of rules,  
+or in other words we need to set constraints so `Autolayout` will figure out where to position the view.
+
+![Missing Constraints](./assets/Missing Constraints.png "Missing Constraints")
+
+In order for our view to be adaptive, we need to set some rules so it will fit several devices.
+
 ## Creating The Stackviews
 
 As specified in Weather UI overview, the current weather UI will be consisted of two views.
@@ -133,7 +163,7 @@ Using Stack Views will ease our development process, simplify our constraints lo
 Using Stack Views comes naturally as one view, can be "treated" as an array of 3 vertical elements, while the other has 2 vertical elements.
 
 Negative
-: As Stack Views are really confusing in the beginning, play with the different options,
+: As Stack Views are really confusing in the beginning, play with the different options  
 other than those suggested in the paragraph below, In order to notice the difference.
 
 #### The Red Stack View Properties
