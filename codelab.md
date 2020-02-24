@@ -90,11 +90,11 @@ Our Primary View will contain 2 Subviews.
 
 #### Current Weather view
 Will be consisted of 2 parts   
-* Part 1  
-  * Current day
+* Part 1 - General Info
+  * Current date
   * Current Temperature in Celsius
   * Current Location
-* Part 2
+* Part 2 - Weather Description
   * An Image of Weather Type
   * Weather Description
 
