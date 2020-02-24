@@ -159,6 +159,7 @@ Add description for the UI Elements required for Weather info.
 
 As specified in Weather UI overview, the current weather UI will be consisted of two views.
 Those Views are marked in the image below in <font color="red">red</font>, and <font color="green">green</font>.
+The red view refers to the General Info View, while the green view refers to the weather description view.
 
 ![Current Weather View](./assets/CurrentWeatherView.png "Current Weather View")
 
