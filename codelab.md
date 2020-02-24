@@ -57,7 +57,7 @@ Open Xcode and select "Create a new Xcode Project"
 
 #### Choose a template for your new project with following options:
 iOS | Single View App  
-![Choose a template](./assets/Chosing template.png)
+![Choose a template](./assets/Choosing a template.png)
 
 #### Choose options for your new project:
 * Product Name - give a meaningful name such as `WeatherApp`
@@ -151,7 +151,11 @@ or in other words we need to set constraints so `Autolayout` will figure out whe
 
 In order for our view to be adaptive, we need to set some rules so it will fit several devices.
 
-## Creating The Stackviews
+## Adding Current Weather - General Info UI Elements
+
+Add description for the UI Elements required for Weather info.
+
+## Creating Current Weather - General Info Stackview
 
 As specified in Weather UI overview, the current weather UI will be consisted of two views.
 Those Views are marked in the image below in <font color="red">red</font>, and <font color="green">green</font>.
@@ -165,7 +169,7 @@ Negative
 : As Stack Views are really confusing in the beginning, play with the different options  
 other than those suggested in the paragraph below, In order to notice the difference.
 
-#### The Red Stack View Properties
+#### The Current Weather General Info Stack View Properties
 * Axis - As Our elements are stacked vertically, we'll choose `Vertical`.
 * Alignment - We'd like our elements to fill the container, we'll choose `Fill`.
 * Distribution - We'd like our elements to be distributed as a proportions of their label size, hence we'll choose `Fill Proportionally`.
@@ -173,7 +177,13 @@ other than those suggested in the paragraph below, In order to notice the differ
 
 ![Info Stack View](./assets/Info Stack View Attributes.png)
 
-#### The Green Stack View properties
+## Adding Current Weather - Description UI Elements
+
+Add description for the UI Elements required for Weather info.
+
+## Creating Current Weather - Description Stackview
+
+#### Current Weather Description Stack View properties
 * Axis - As our elements are stacked vertically, we'll choose `Vertical`.
 * Alignment - We'd like our elements to be in the Center of the container, we'll choose `Center`.
 * Distribution - We'd like our elements to be vertically stretched in the container, hence, we'll choose `Fill`.
