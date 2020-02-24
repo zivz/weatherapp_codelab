@@ -124,10 +124,9 @@ The stack view manages the layout of all the views in its arrangedSubviews prope
 
 ## Creating the basic view
 
-As seen in the image capture below, Current Weather View and table view are two separate views in the view hold by the view controller.
+As seen in the image capture below, **Current Weather View** and **Weather Forecast (table) view** are two separate views in the view hold by the view controller.
 
 ![WeatherApp Subviews](./assets/TwoViews.png "Current Weather View and Forecast Table View")
-
 We'll create this view and later pile up our detailed UI Elements.
 
 We're basically going to add the blue view, holding our detailed UI Elements as in the 3d capture below.
@@ -135,11 +134,11 @@ We're basically going to add the blue view, holding our detailed UI Elements as 
 
 In order to do so, follow the following steps
 1. open Main.storyboard
-  1. You should currently see a View inside the View Controller hierarchy.
+  1.1. You should currently see a View inside the View Controller hierarchy.  
   ![View Controller Scene](./assets/View Controller Scene.png "View Controller Scene")
 2. Tap on the `+` Button in the right top corner, in order to reveal the `Object Library`
-  1. Search for `view` and drag it beneath the View.
-  2. You should currently have a view inside your previous view.
+  2.1. Search for `view` and drag it beneath the View.
+  2.2. You should currently have a view inside your previous view.  
   ![Adding a view](./assets/Adding a view.png "Adding a view")
 
 ### Setting our view constraints.
