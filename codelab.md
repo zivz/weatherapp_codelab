@@ -120,4 +120,4 @@ From [SwiftLee](https://www.avanderlee.com/swift/auto-layout-programmatically/) 
 #### UIStackview
 From [apple.com](https://developer.apple.com/documentation/uikit/uistackview) - Stack views let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device’s orientation, screen size, and any changes in the available space.
 The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view’s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view’s axis, distribution, alignment, spacing, and other properties.
-[Stack view - Apple developer](https://docs-assets.developer.apple.com/published/82128953f6/uistack_hero_2x_04e50947-5aa0-4403-825b-26ba4c1662bd.png)
+![Stack view - Apple developer](./assets/Apple StackView.png)
