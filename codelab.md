@@ -75,7 +75,7 @@ Once the project is created, The project file will appear on the screen.
 **Under General tab verify the following:**  
 * Verify `Display Name, Bundle Identifier` are correct under `identity`
 * Check `iPhone` only, under `Deployment info`
-* Verify `Portrait` only, under `Device Orientation`
+* Check `Portrait` only, under `Device Orientation`
 
 ![Project Settings](./assets/Project Settings.png)
 
