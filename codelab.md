@@ -47,8 +47,8 @@ Duration: 0:04:00
 This tutorial assumes you have basic familiarity with Xcode, as provided in separate session.
 
 **Resources:**
+* [Download Xcode from App Store](https://apps.apple.com/il/app/xcode/id497799835?mt=12)
 * [Xcode Essentials](https://www.youtube.com/watch?v=jniJeamcIUU)
-* [Xcode AppStore](https://apps.apple.com/il/app/xcode/id497799835?mt=12)
 
 #### Create a new Xcode Project
 
