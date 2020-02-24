@@ -148,4 +148,5 @@ other than those suggested in the paragraph below, In order to notice the differ
 * Axis - As our elements are stacked vertically, we'll choose `Vertical`.
 * Alignment - We'd like our elements to be in the Center of the container, we'll choose `Center`.
 * Distribution - We'd like our elements to be vertically stretched in the container, hence, we'll choose `Fill`.
+
 ![Image Stack View](./assets/Image Stack View Attributes.png)
