@@ -135,14 +135,21 @@
     
       <google-codelab-step label="Creating the basic view" duration="0">
         <p>As seen in the image capture below, <strong>Current Weather View</strong> and <strong>Weather Forecast (table) view</strong> are two separate views in the view hold by the view controller.</p>
-<p><img alt="WeatherApp Subviews" title="Current Weather View and Forecast Table View" src="img/bc5e422b731ea0be.png"> We&#39;ll create this view and later pile up our detailed UI Elements.</p>
+<p><img alt="WeatherApp Subviews" title="Current Weather View and Forecast Table View" src="img/bc5e422b731ea0be.png"><br> We&#39;ll create this view and later pile up our detailed UI Elements.</p>
 <p>We&#39;re basically going to add the blue view, holding our detailed UI Elements as in the 3d capture below. <img alt="Current Weather 3D Capture" title="Current Weather 3D Capture" src="img/bb87a7126996f47.png"></p>
-<p>In order to do so, follow the following steps</p>
+<p>In order to do so, follow the following steps:</p>
 <ol type="1">
-<li>open Main.storyboard 1.1. You should currently see a View inside the View Controller hierarchy.<br><img alt="View Controller Scene" title="View Controller Scene" src="img/775024cb69f1b752.png"></li>
-<li>Tap on the <code>+</code> Button in the right top corner, in order to reveal the <code>Object Library</code> 2.1. Search for <code>view</code> and drag it beneath the View. 2.2. You should currently have a view inside your previous view.<br><img alt="Adding a view" title="Adding a view" src="img/868554642207f3ad.png"></li>
+<li>open Main.storyboard  <ol type="1">
+<li>You should currently see a View inside the View Controller hierarchy.<br><img alt="View Controller Scene" title="View Controller Scene" src="img/775024cb69f1b752.png"></li>
 </ol>
-<h2 is-upgraded>Setting our view constraints.</h2>
+</li>
+<li>Tap on the <code>+</code> Button in the right top corner, in order to reveal the <code>Object Library</code><ol type="1">
+<li>Search for <code>view</code> and drag it beneath the View.</li>
+<li>You should currently have a view inside your previous view.<br><img alt="Adding a view" title="Adding a view" src="img/868554642207f3ad.png"></li>
+</ol>
+</li>
+</ol>
+<h2 is-upgraded>Setting our view constraints</h2>
 <aside class="warning"><p>you should currently notice a red arrow indicating there&#39;s a problem with your view since it has no set of rules,<br> or in other words we need to set constraints so <code>Autolayout</code> will figure out where to position the view.</p>
 </aside>
 <p class="image-container"><img alt="Missing Constraints" title="Missing Constraints" src="img/52e11632d7f0d741.png"></p>
