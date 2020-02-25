@@ -158,26 +158,23 @@ or in other words we need to set constraints so `Autolayout` will figure out whe
 ![Missing Constraints](./assets/Missing_Constraints.png "Missing Constraints")
 
 In order for our view to be adaptive, we need to set some rules so it will fit several devices:
-* Click on Add New Constraints Button
+* Click on Add New Constraints Button  
 ![Add New Constraints](./assets/add_new_constraints.png "Add New Constraints")
-* Pin The View to the Top, leading and trailing edges.
+* Pin the view to the top, leading and trailing edges.
 * Add a height of 300.
 * Click on Add 4 New Constraints  
 ![Add 4 Constraints](./assets/add_4_constraints.png "Add 4 Constraints")
 * Verify The Missing Constraints error is gone
 * Build and run your app.
 
-
-
-
-
 ## Adding Current Weather - General Info UI Elements
 
 We'll add the items as in the image below.  
 ![CurrentWeather-GeneralInfo](./assets/CurrentWeather-GeneralInfo.png)
 
-Follow these steps in order to add the items;
-* Step 1: In Object Library (`+` Button) Search For a Label:
+Follow these steps in order to add the items:
+* Step 1: In Object Library (`+` Button) Search For an Image:
+![CurrentWeather-Image](./assets/Choosing_a_label.png)
 * Step 2: Drag the label under the blue view we've previously created.
 * Step 3: Copy and Paste The Label Twice, so you'll end up with 3 Labels.
 * Step 4: By clicking on the Labels give them meaningful names:
@@ -186,11 +183,6 @@ Follow these steps in order to add the items;
   * `Current Location` for the bottom Label
 * Step 5: Your Interface builder should look like that  
 ![CurrentWeather-GeneralInfoItems](./assets/CurrentWeather-GeneralInfoItems.png)
-
-
-
-
-
 
 ## Creating Current Weather - General Info Stackview
 
@@ -217,7 +209,19 @@ other than those suggested in the paragraph below, In order to notice the differ
 
 ## Adding Current Weather - Description UI Elements
 
-Add description for the UI Elements required for Weather info.
+We'll add the items as in the image below.  
+![CurrentWeather-Description](./assets/CurrentWeather_DescriptionView.png)
+
+Follow these steps in order to add the items:
+* Step 1: In Object Library (`+` Button) Search For an Image:
+![CurrentWeather-Image](./assets/Choosing_an_image.png)
+* Step 2: Drag the image under the blue view we've previously created.
+* Step 3: In Object Library (`+` Button) Search For a Label:
+![CurrentWeather-Label](./assets/Choosing_a_label.png)
+* Step 4: Drag the label under the blue view we've previously created.
+* Step 5: By clicking on the Items give them meaningful names:
+  * `Description Image` for the Image
+  * `Description Label` for the middle Label
 
 ## Creating Current Weather - Description Stackview
 
