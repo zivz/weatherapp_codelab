@@ -53,11 +53,11 @@ This tutorial assumes you have basic familiarity with Xcode, as provided in a se
 #### Create a new Xcode Project
 
 Open Xcode and select "Create a new Xcode Project"  
-![Create a new Xcode Project](./assets/Create a new xcode project.png)
+![Create a new Xcode Project](./assets/Create_a_new_xcode_project.png)
 
 #### Choose a template for your new project with following options:
 iOS | Single View App  
-![Choose a template](./assets/Choosing a template.png)
+![Choose a template](./assets/Choosing_a_template.png)
 
 #### Choose options for your new project:
 * Product Name - give a meaningful name such as `WeatherApp`
@@ -68,7 +68,7 @@ iOS | Single View App
 * User Interface - Choose Storyboard
 * Leave `User Core Data, Include Unit Tests and Include UI Tests` **Unchecked**
 
-![Template Options](./assets/Template options.png)
+![Template Options](./assets/Template_options.png)
 
 #### Edit and Verify Project Settings  
 Once the project is created, The project file will appear on the screen.
@@ -77,7 +77,7 @@ Once the project is created, The project file will appear on the screen.
 * Check `iPhone` only, under `Deployment info`
 * Check `Portrait` only, under `Device Orientation`
 
-![Project Settings](./assets/Project Settings.png)
+![Project Settings](./assets/Project_Settings.png)
 
 ## Weather UI Overview
 
@@ -120,7 +120,7 @@ From [SwiftLee](https://www.avanderlee.com/swift/auto-layout-programmatically/) 
 #### UIStackview
 From [apple.com](https://developer.apple.com/documentation/uikit/uistackview) - Stack views let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device’s orientation, screen size, and any changes in the available space.
 The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view’s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view’s axis, distribution, alignment, spacing, and other properties.
-![Stack view - Apple developer](./assets/Apple StackView.png)
+![Stack view - Apple developer](./assets/Apple_StackView.png)
 
 ## Creating the basic view
 
@@ -130,12 +130,12 @@ As seen in the image capture below, **Current Weather View** and **Weather Forec
 We'll create this view and later pile up our detailed UI Elements.  
 
 We're basically going to add the blue view, holding our detailed UI Elements as in the 3d capture below.
-![Current Weather 3D Capture](./assets/Current Weather 3D.png "Current Weather 3D Capture")
+![Current Weather 3D Capture](./assets/Current_Weather_3D.png "Current Weather 3D Capture")
 
 In order to do so, follow the following steps:
 1. open Main.storyboard
   1. You should currently see a View inside the View Controller hierarchy.  
-  ![View Controller Scene](./assets/View Controller Scene.png "View Controller Scene")
+  ![View Controller Scene](./assets/View_Controller_Scene.png "View Controller Scene")
 2. Tap on the `+` Button in the right top corner, in order to reveal the `Object Library`  
   1. Search for `view` and drag it beneath the View.    
   ![View](./assets/ObjectLibrary-View.png)  
@@ -144,13 +144,32 @@ In order to do so, follow the following steps:
 
 ### Setting our view constraints
 
+**Before we start follow the steps below, that we'll help us figure out how view looks like:**
+* Go to the view attributes, and set its color to `System Teal Color`.
+![Current Weather View Teal Color](./assets/CurrentWeatherView_TealColor.png "Current Weather View Teal Color")
+* change the View name to a meaningful name such as `Current Weather View`
+![Current Weather View Rename](./assets/CurrentWeatherView_rename.png)
+* Run the application and verify your changes.
+
 Negative
 : you should currently notice a red arrow indicating there's a problem with your view since it has no set of rules,  
 or in other words we need to set constraints so `Autolayout` will figure out where to position the view.
 
-![Missing Constraints](./assets/Missing Constraints.png "Missing Constraints")
+![Missing Constraints](./assets/Missing_Constraints.png "Missing Constraints")
 
-In order for our view to be adaptive, we need to set some rules so it will fit several devices.
+In order for our view to be adaptive, we need to set some rules so it will fit several devices:
+* Click on Add New Constraints Button
+![Add New Constraints](./assets/add_new_constraints.png "Add New Constraints")
+* Pin The View to the Top, leading and trailing edges.
+* Add a height of 300.
+* Click on Add 4 New Constraints  
+![Add 4 Constraints](./assets/add_4_constraints.png "Add 4 Constraints")
+* Verify The Missing Constraints error is gone
+* Build and run your app.
+
+
+
+
 
 ## Adding Current Weather - General Info UI Elements
 
@@ -194,7 +213,7 @@ other than those suggested in the paragraph below, In order to notice the differ
 * Distribution - We'd like our elements to be distributed as a proportions of their label size, hence we'll choose `Fill Proportionally`.
 * Spacing - is redundant here since Our Distribution defines the way the items will be spaced.
 
-![Info Stack View](./assets/Info Stack View Attributes.png)
+![Info Stack View](./assets/Info_Stack_View_Attributes.png)
 
 ## Adding Current Weather - Description UI Elements
 
@@ -207,4 +226,4 @@ Add description for the UI Elements required for Weather info.
 * Alignment - We'd like our elements to be in the Center of the container, we'll choose `Center`.
 * Distribution - We'd like our elements to be vertically stretched in the container, hence, we'll choose `Fill`.
 
-![Image Stack View](./assets/Image Stack View Attributes.png)
+![Image Stack View](./assets/Image_Stack_View_Attributes.png)
