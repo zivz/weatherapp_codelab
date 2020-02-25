@@ -222,6 +222,8 @@ Follow these steps in order to add the items:
 * Step 5: By clicking on the Items give them meaningful names:
   * `Description Image` for the Image
   * `Description Label` for the middle Label
+* Step 6: Your Interface builder should look like that  
+![Description Interface Builder](./assets/Description_Interface_Builder.png)
 
 ## Creating Current Weather - Description Stackview
 
