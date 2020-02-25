@@ -255,3 +255,11 @@ Now that we have two Stackviews, we need to constraint them to the view, and eac
 
 Your constraints should look as following:  
 ![Stack View Constraints](./assets/StackViews_Constraints.png)
+
+## Adding Assets to our Project
+As part of our data model, we'll parse the weather description, and map it to a local asset.
+In order to do so, go ahead and download the assets from [assets.zip](./resources/UI_Assets.zip)
+
+Once a weather description will be parsed, it will be associated to a local image in our assets and then will be displayed to our user.
+
+In order to import the resources to our project, simply go to `Assets.xcassets` folder and drag the images after being extracted from the attached zip.  
