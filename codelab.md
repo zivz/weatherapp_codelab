@@ -237,7 +237,7 @@ Follow these steps in order to add the items:
 ## Setting constraints for our Stackviews
 Now that we have two Stackviews, we need to constraint them to the view, and each other.
 
-We'll start with adding constraints to the `Info Stackview`:
+#### Adding constraints to the `Info Stackview`:
 * Step 1: Click on the Info Stack View, then on `Add New Constraints`
   * Pin the stack view 20 pts to the top of the view
   * Pin the stack view 20 pts to the bottom of the view
@@ -245,7 +245,7 @@ We'll start with adding constraints to the `Info Stackview`:
 * Step 2: We still need a constrain to the trailing edge,
   * We'll solve that by adding constraints to the Description stack view.
 
-Go ahead by adding constraints to the `Description Stack View`:
+#### Adding constraints to the `Description Stack View`:
 * Step 1: Click on the Description Stack View then on `Add New Constraints`
   * Pin the stack view 100 pts to the top of the view
   * Pin the stack view 20 pts to the bottom of the view
@@ -253,5 +253,5 @@ Go ahead by adding constraints to the `Description Stack View`:
 * Step 2: Add a constrain related to the Info stack view:
   * The constrain should reflect that the leading Image Stack View will be 20 pts from the trailing edge of the Info Stack View
 
-Your constraints should look as following:
+Your constraints should look as following:  
 ![Stack View Constraints](./assets/StackViews_Constraints.png)
