@@ -258,8 +258,8 @@ Your constraints should look as following:
 
 ## Adding Assets to our Project
 As part of our data model, we'll parse the weather description, and map it to a local asset.
-In order to do so, go ahead and download the assets from
-<a href="./resources/UI_Assets.zip" download>Download Assets</a>
+In order to do so, go ahead and
+<a href="https://github.com/zivz/weatherapp_codelab/blob/master/resources/UI_Assets.zip" download>Download Image Assets</a>
 <!-- [download assets](./resources/UI_Assets.zip) -->
 
 Once a weather description will be parsed, it will be associated to a local image in our assets and then will be displayed to our user.
