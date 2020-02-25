@@ -257,7 +257,7 @@ Your constraints should look as following:
 ![Stack View Constraints](./assets/StackViews_Constraints.png)
 
 ## Adding Assets to our Project
-As part of our data model, we'll parse the weather description, and map it to a local asset.
+As part of our data model, we'll parse the weather description, and map it to a local asset.  
 In order to do so, go ahead and
 <a href="https://github.com/zivz/weatherapp_codelab/raw/master/resources/UI_Assets.zip" download>Download Image Assets</a>
 
