@@ -240,6 +240,39 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Setting constraints for our Stackviews" duration="0">
+        <p>Now that we have two Stackviews, we need to constraint them to the view, and each other.</p>
+<p>We&#39;ll start with adding constraints to the <code>Info Stackview</code>:</p>
+<ul>
+<li>Step 1: Click on the Info Stack View, then on <code>Add New Constraints</code><ul>
+<li>Pin the stack view 20 pts to the top of the view</li>
+<li>Pin the stack view 20 pts to the bottom of the view</li>
+<li>Pin the stack view 20 pts to the leading edge of the view</li>
+</ul>
+</li>
+<li>Step 2: We still need a constrain to the trailing edge,  <ul>
+<li>We&#39;ll solve that by adding constraints to the Description stack view.</li>
+</ul>
+</li>
+</ul>
+<p>Go ahead by adding constraints to the <code>Description Stack View</code>:</p>
+<ul>
+<li>Step 1: Click on the Description Stack View then on <code>Add New Constraints</code><ul>
+<li>Pin the stack view 100 pts to the top of the view</li>
+<li>Pin the stack view 20 pts to the bottom of the view</li>
+<li>Pin the stack view 20 pts to the trailing of the view</li>
+</ul>
+</li>
+<li>Step 2: Add a constrain related to the Info stack view:  <ul>
+<li>The constrain should reflect that the leading Image Stack View will be 20 pts from the trailing edge of the Info Stack View</li>
+</ul>
+</li>
+</ul>
+<p>Your constraints should look as following: <img alt="Stack View Constraints" src="img/772a9464ef352cec.png"></p>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
