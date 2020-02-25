@@ -136,10 +136,11 @@ In order to do so, follow the following steps:
 1. open Main.storyboard
   1. You should currently see a View inside the View Controller hierarchy.  
   ![View Controller Scene](./assets/View Controller Scene.png "View Controller Scene")
-2. Tap on the `+` Button in the right top corner, in order to reveal the `Object Library`
-  1. Search for `view` and drag it beneath the View.
+2. Tap on the `+` Button in the right top corner, in order to reveal the `Object Library`  
+  1. Search for `view` and drag it beneath the View.    
+  ![View](./assets/ObjectLibrary-View.png)  
   2. You should currently have a view inside your previous view.  
-  ![Adding a view](./assets/Adding a view.png "Adding a view")
+  ![Adding a view](./assets/Adding_a_view.png "Adding a view")
 
 ### Setting our view constraints
 
@@ -153,7 +154,24 @@ In order for our view to be adaptive, we need to set some rules so it will fit s
 
 ## Adding Current Weather - General Info UI Elements
 
-Add description for the UI Elements required for Weather info.
+We'll add the items as in the image below.  
+![CurrentWeather-GeneralInfo](./assets/CurrentWeather-GeneralInfo.png)
+
+Follow these steps in order to add the items;
+* Step 1: In Object Library (`+` Button) Search For a Label:
+* Step 2: Drag the label under the blue view we've previously created.
+* Step 3: Copy and Paste The Label Twice, so you'll end up with 3 Labels.
+* Step 4: By clicking on the Labels give them meaningful names:
+  * `Current Date` for the top label
+  * `Current Temp` for the middle Label
+  * `Current Location` for the bottom Label
+* Step 5: Your Interface builder should look like that  
+![CurrentWeather-GeneralInfoItems](./assets/CurrentWeather-GeneralInfoItems.png)
+
+
+
+
+
 
 ## Creating Current Weather - General Info Stackview
 
