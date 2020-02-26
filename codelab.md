@@ -153,9 +153,10 @@ In order to do so, follow the following steps:
 
 Negative
 : Notice, there's a red arrow indicating a problem with your view since it has no set of rules,  
+![Missing Constraints](./assets/Missing_Constraints.png "Missing Constraints")
 or in other words we need to set constraints so `Autolayout` will figure out where to position the Current weather view.
 
-![Missing Constraints](./assets/Missing_Constraints.png "Missing Constraints")
+
 
 In order for our view to be adaptive, we need to set some rules so it will fit several devices:
 * Click on Add New Constraints Button  
