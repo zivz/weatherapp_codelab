@@ -137,7 +137,7 @@ In order to do so, follow the following steps:
   1. You should currently see a View inside the View Controller hierarchy.  
   ![View Controller Scene](./assets/View_Controller_Scene.png "View Controller Scene")
 2. Tap on the `+` Button in the right top corner, in order to reveal the `Object Library`  
-  1. Search for `view` and drag it beneath the View.    
+  1. Search for `View/UIView` and drag it beneath the View.    
   ![View](./assets/ObjectLibrary-View.png)  
   2. You should currently have a view inside your previous view.  
   ![Adding a view](./assets/Adding_a_view.png "Adding a view")
