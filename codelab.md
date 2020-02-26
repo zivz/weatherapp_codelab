@@ -152,8 +152,8 @@ In order to do so, follow the following steps:
 * Run the application and verify your changes.
 
 Negative
-: you should currently notice a red arrow indicating there's a problem with your view since it has no set of rules,  
-or in other words we need to set constraints so `Autolayout` will figure out where to position the view.
+: Notice, there's a red arrow indicating a problem with your view since it has no set of rules,  
+or in other words we need to set constraints so `Autolayout` will figure out where to position the Current weather view.
 
 ![Missing Constraints](./assets/Missing_Constraints.png "Missing Constraints")
 
