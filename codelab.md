@@ -263,4 +263,10 @@ In order to do so, go ahead and
 
 Once a weather description will be parsed, it will be associated to a local image in our assets and then will be displayed to our user.
 
-In order to import the resources to our project, simply go to `Assets.xcassets` folder and drag the images after being extracted from the attached zip.  
+In order to import the resources to our project, simply go to `Assets.xcassets` folder and drag the images after being extracted from the attached zip.
+
+```swift
+func getSomething(){
+
+}
+```
