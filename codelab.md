@@ -145,7 +145,7 @@ In order to do so, follow the following steps:
 ### Setting our view constraints
 
 **Before we start follow the steps below, that we'll help us figure out how view looks like:**
-* Go to the view attributes, and set its color to `System Teal Color`.
+* Go to the view attributes, and set its color to `System Teal Color`.  
 ![Current Weather View Teal Color](./assets/CurrentWeatherView_TealColor.png "Current Weather View Teal Color")
 * change the View name to a meaningful name such as `Current Weather View`
 ![Current Weather View Rename](./assets/CurrentWeatherView_rename.png)
