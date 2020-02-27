@@ -579,7 +579,7 @@ struct CurrentWeather: Codable {
 ## Creating NetworkError
 In order to handle the various cases of network errors, we'll create a new group, named `Utilities`.
 
-Follow these steps in order to create our Network Manager file:
+Follow these steps in order to create our WeatherError file:
 1. Right click our new group, named `Utilities`
 2. Choose New file..
 3. Choose `Swift`
