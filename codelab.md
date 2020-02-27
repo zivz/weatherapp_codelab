@@ -618,6 +618,46 @@ enum WeatherError: String, Error {
 }
 ```
 
+## Date Formatting
+`Swift` Foundation provides us to get the current date.
+This is required in order to display the current date label, but the format we'll be using doesn't match our needs.
+
+We'll create an extension for `Date` and use it to display the date in the format we want.
+
+Create a new group, named `Extensions`
+Follow these steps in order to create our Date+Ext file:
+1. Right click our new group, named `Extensions`
+2. Choose New file..
+3. Choose `Swift`
+4. Name it `Date+Ext.swift`   
+
+Using [this web site](https://nsdateformatter.com), allows to easily deal with formatting.
+Since we want our Date to Include Month, day and year we'll play with the format in the above link and copy the format.  
+![Date Format][./assets/DateFormat.png]
+
+in our file, insert the following code:
+```Swift
+func currentDate() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMMM dd, yyyy"
+    let currentDate = dateFormatter.string(from: Date())
+    return "Today, \(currentDate)"
+}
+```
+
+Alternatively we can use this code, I've found while searching in [stackoverflow](https://stackoverflow.com/questions/24100855/set-a-datestyle-in-swift)
+```Swift
+func currentDate() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .long
+    dateFormatter.timeStyle = .none
+    let currentDate = dateFormatter.string(from: Date())
+    return "Today, \(currentDate)"
+}
+```
+
+
+
 ## Connecting the UI To Our View controller
 
 #### Renaming our View controller

@@ -583,6 +583,38 @@ struct Weather: Decodable {
 
       </google-codelab-step>
     
+      <google-codelab-step label="Date Formatting" duration="0">
+        <p><code>Swift</code> Foundation provides us to get the current date. This is required in order to display the current date label, but the format we&#39;ll be using doesn&#39;t match our needs.</p>
+<p>We&#39;ll create an extension for <code>Date</code> and use it to display the date in the format we want.</p>
+<p>Create a new group, named <code>Extensions</code> Follow these steps in order to create our Date+Ext file:</p>
+<ol type="1">
+<li>Right click our new group, named <code>Extensions</code></li>
+<li>Choose New file..</li>
+<li>Choose <code>Swift</code></li>
+<li>Name it <code>Date+Ext.swift</code><br></li>
+</ol>
+<p>Using <a href="https://nsdateformatter.com" target="_blank">this web site</a>, allows to easily deal with formatting. Since we want our Date to Include Month, day and year we&#39;ll play with the format in the above link and copy the format.<br> ![Date Format][./assets/DateFormat.png]</p>
+<p>in our file, insert the following code:</p>
+<pre><code>func currentDate() -&gt; String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = &#34;MMMM dd, yyyy&#34;
+    let currentDate = dateFormatter.string(from: Date())
+    return &#34;Today, \(currentDate)&#34;
+}
+</code></pre>
+<p>Alternatively we can use this code, I&#39;ve found while searching in <a href="https://stackoverflow.com/questions/24100855/set-a-datestyle-in-swift" target="_blank">stackoverflow</a></p>
+<pre><code>func currentDate() -&gt; String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .long
+    dateFormatter.timeStyle = .none
+    let currentDate = dateFormatter.string(from: Date())
+    return &#34;Today, \(currentDate)&#34;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Connecting the UI To Our View controller" duration="0">
         <h3 is-upgraded>Renaming our View controller</h3>
 <p>In order to rename our view controller follows these steps:</p>
