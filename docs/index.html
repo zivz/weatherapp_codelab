@@ -351,10 +351,10 @@
         <p>Will now create our Network Manager, the Network Manager is a singleton.</p>
 <h3 is-upgraded>Create our singleton</h3>
 <p>Copy these lines of code, under our EndPoints structure.</p>
-<pre><code>  class NetworkManager {
-    static let shared = NetworkManager()
-    private init() {}
-  }
+<pre><code>class NetworkManager {
+  static let shared = NetworkManager()
+  private init() {}
+}
 </code></pre>
 <p>By using private init() our NetworkManager cannot be instantiated more than once, hence, it&#39;s a singleton.</p>
 <h3 is-upgraded>Creating our currentWeather Network Call</h3>
@@ -369,26 +369,26 @@
 <p>Our data task, which will handle the api call will be consisted from constructing the url, firing the request and handling the response.</p>
 <p>Let&#39;s create the url</p>
 <p>in our function, copy and paste these lines of code:</p>
-<pre><code>  guard let url = EndPoints.currentWeatherURL else {
-      completionHandler(.failure(.invalidURL))
-      return
-  }
+<pre><code>guard let url = EndPoints.currentWeatherURL else {
+    completionHandler(.failure(.invalidURL))
+    return
+}
 </code></pre>
 <p>This part was easy, since we were using our EndPoints structure. We also had to handle an error, since the url is optional and we don&#39;t want to continue if the url is <code>nil</code>. In that case we&#39;ll return a failure case, the failure case is expecting an error, so we provided our WeatherError enum with invalidUrl.</p>
 <p>Let&#39;s fire our task, will be using URLSession.<br> URLSession provides and API for downloading data from and uploading data to endpoints indicated by URLs. You can read more about URLSession <a href="https://developer.apple.com/documentation/foundation/urlsession" target="_blank">here</a>, <a href="https://www.raywenderlich.com/3244963-urlsession-tutorial-getting-started" target="_blank">here</a> and <a href="https://learnappmaking.com/urlsession-swift-networking-how-to/" target="_blank">here</a></p>
 <p>under our guard statement, copy and paste this line of code</p>
-<pre><code>  let task = URLSession.shared.dataTask(with: url) { data, response, error in
+<pre><code>let task = URLSession.shared.dataTask(with: url) { data, response, error in
 
-  }
+}
 </code></pre>
 <p>We now see that our dataTask, using the url we&#39;ve created, the completionHandler of the task either returns us data, response and error.</p>
 <h3 is-upgraded>Handling the error</h3>
 <p>error means there was a transport error, either by sending the request, or receiving the response.</p>
 <p>to handle the error copy and paste these lines of code:</p>
-<pre><code>  if let _ = error {
-      completionHandler(.failure(.unableToComplete))
-      return
-  }
+<pre><code>if let _ = error {
+    completionHandler(.failure(.unableToComplete))
+    return
+}
 </code></pre>
 <h3 is-upgraded>Handling the response</h3>
 <p>We&#39;re expecting for response code of 200, so any other response code will indicate us an error. to handle responses other than 200, copy and paste these lines of code:</p>
@@ -407,14 +407,14 @@
 <h3 is-upgraded>Decoding our data</h3>
 <p>We&#39;ll be using JSONDecoder, since our data will be serialized to JSON, Then we&#39;d like to parse our JSON into an object, which will be our DecodedWeather structure. We&#39;ll then map for our own convenience DecodedWeather to CurrentWeather which will contain the data in the structure we want.</p>
 <p>go ahead and copy these lines of code under data closing braces:</p>
-<pre><code>  do {
-      let decoder = JSONDecoder()
-      let decodedWeather = try decoder.decode(DecodedWeather.self, from: data)
-      let currentWeather = CurrentWeather(weather: decodedWeather)
-      completionHandler(.success(currentWeather))
-  } catch {
-      completionHandler(.failure(.invalidData))
-  }
+<pre><code>do {
+    let decoder = JSONDecoder()
+    let decodedWeather = try decoder.decode(DecodedWeather.self, from: data)
+    let currentWeather = CurrentWeather(weather: decodedWeather)
+    completionHandler(.success(currentWeather))
+} catch {
+    completionHandler(.failure(.invalidData))
+}
 </code></pre>
 <h3 is-upgraded>Firing the request</h3>
 <p>After the closing braces of our task, insert <code>task.resume()</code> This line of code will fire our request.</p>

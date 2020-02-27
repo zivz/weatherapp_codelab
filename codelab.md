@@ -348,10 +348,10 @@ Will now create our Network Manager, the Network Manager is a singleton.
 #### Create our singleton
 Copy these lines of code, under our EndPoints structure.
 ```swift
-  class NetworkManager {
-    static let shared = NetworkManager()
-    private init() {}
-  }
+class NetworkManager {
+  static let shared = NetworkManager()
+  private init() {}
+}
 ```
 
 By using private init() our NetworkManager cannot be instantiated more than once, hence, it's a singleton.
@@ -379,10 +379,10 @@ Let's create the url
 
 in our function, copy and paste these lines of code:
 ```swift
-  guard let url = EndPoints.currentWeatherURL else {
-      completionHandler(.failure(.invalidURL))
-      return
-  }
+guard let url = EndPoints.currentWeatherURL else {
+    completionHandler(.failure(.invalidURL))
+    return
+}
 ```
 
 This part was easy, since we were using our EndPoints structure.
@@ -396,9 +396,9 @@ You can read more about URLSession [here](https://developer.apple.com/documentat
 under our guard statement, copy and paste this line of code
 
 ```Swift
-  let task = URLSession.shared.dataTask(with: url) { data, response, error in
+let task = URLSession.shared.dataTask(with: url) { data, response, error in
 
-  }
+}
 ```
 
 We now see that our dataTask, using the url we've created, the completionHandler of the task either returns us data, response and error.
@@ -408,10 +408,10 @@ error means there was a transport error, either by sending the request, or recei
 
 to handle the error copy and paste these lines of code:
 ```Swift
-  if let _ = error {
-      completionHandler(.failure(.unableToComplete))
-      return
-  }
+if let _ = error {
+    completionHandler(.failure(.unableToComplete))
+    return
+}
 ```
 
 #### Handling the response
@@ -440,14 +440,14 @@ We'll then map for our own convenience DecodedWeather to CurrentWeather which wi
 
 go ahead and copy these lines of code under data closing braces:
 ```Swift
-  do {
-      let decoder = JSONDecoder()
-      let decodedWeather = try decoder.decode(DecodedWeather.self, from: data)
-      let currentWeather = CurrentWeather(weather: decodedWeather)
-      completionHandler(.success(currentWeather))
-  } catch {
-      completionHandler(.failure(.invalidData))
-  }
+do {
+    let decoder = JSONDecoder()
+    let decodedWeather = try decoder.decode(DecodedWeather.self, from: data)
+    let currentWeather = CurrentWeather(weather: decodedWeather)
+    completionHandler(.success(currentWeather))
+} catch {
+    completionHandler(.failure(.invalidData))
+}
 ```
 
 ####Firing the request
