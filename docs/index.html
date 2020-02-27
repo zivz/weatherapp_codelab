@@ -358,7 +358,7 @@
 </code></pre>
 <p>By using private init() our NetworkManager cannot be instantiated more than once, hence, it&#39;s a singleton.</p>
 <h3 is-upgraded>Creating our currentWeather Network Call</h3>
-<p>Our network call will not get any outside parameters, but rather be using our location coordinates, which will be accessed through a singleton as well. We&#39;ll use the enumeration to capture information about whether an asychronous call succeeds or fails, and use the associated values for the <code>Result.success(_:)</code> and <code>Result.failure(_:)</code> cases to carry information about the result of the call. To read more about using result, I&#39;ve found <a href="https://www.hackingwithswift.com/articles/161/how-to-use-result-in-swift" target="_blank">this article</a> very helpful.</p>
+<p>Our network call will not get any outside parameters, but rather be using our location coordinates, which will be accessed through a singleton as well. We&#39;ll use the enumeration to capture information about whether an asynchronous call succeeds or fails, and use the associated values for the <code>Result.success(_:)</code> and <code>Result.failure(_:)</code> cases to carry information about the result of the call. To read more about using result, I&#39;ve found <a href="https://www.hackingwithswift.com/articles/161/how-to-use-result-in-swift" target="_blank">this article</a> very helpful.</p>
 <p>Go ahead an declare our function under <code>private init() {}</code> declaration.</p>
 <pre><code>func getCurrentWeather(completionHandler: @escaping (Result&lt;CurrentWeather, WeatherError&gt;) -&gt; Void ) {
 
@@ -423,7 +423,139 @@
       </google-codelab-step>
     
       <google-codelab-step label="Preparing our Data model" duration="0">
-        <h3 is-upgraded>Creating a group for our data model</h3>
+        <p>After fetching our data, using the getCurrentWeather request, we&#39;ll be using JSON decoder and get our object in hand. We&#39;ll use decodable for parsing our data. Then map our structure to another structure, for our own convenience.</p>
+<h3 is-upgraded>Creating a group for our data model</h3>
+<p>In order to so, right click on Weather App Folder and Choose <code>Create New Group</code> Name the group <code>Model</code></p>
+<p>Follow these steps in order to create our Network Manager file:</p>
+<ol type="1">
+<li>Right click our new group, named <code>Model</code></li>
+<li>Choose New file..</li>
+<li>Choose <code>Swift</code></li>
+<li>Name it <code>CurrentWeather.swift</code></li>
+</ol>
+<p>By examining our response, we need to decode the following pieces:</p>
+<p>from the first hierarchy we&#39;ll need:</p>
+<ul>
+<li>&#34;name&#34; for the Location label</li>
+</ul>
+<p>from weather structure, we&#39;ll need:</p>
+<ul>
+<li>&#34;main&#34; for weather description and image.</li>
+</ul>
+<p>from main structure, we&#39;ll need:</p>
+<ul>
+<li>&#34;temp&#34; for weather description.</li>
+</ul>
+<p>The current date label will not be taken from the network response.</p>
+<pre><code>{
+    &#34;coord&#34;: {
+        &#34;lon&#34;: 34.91,
+        &#34;lat&#34;: 31.99
+    },
+    &#34;weather&#34;: [
+        {
+            &#34;id&#34;: 802,
+            &#34;main&#34;: &#34;Clouds&#34;,
+            &#34;description&#34;: &#34;scattered clouds&#34;,
+            &#34;icon&#34;: &#34;03d&#34;
+        }
+    ],
+    &#34;base&#34;: &#34;stations&#34;,
+    &#34;main&#34;: {
+        &#34;temp&#34;: 20.12,
+        &#34;feels_like&#34;: 16.12,
+        &#34;temp_min&#34;: 17.78,
+        &#34;temp_max&#34;: 21.67,
+        &#34;pressure&#34;: 1019,
+        &#34;humidity&#34;: 46
+    },
+    &#34;visibility&#34;: 10000,
+    &#34;wind&#34;: {
+        &#34;speed&#34;: 5.1,
+        &#34;deg&#34;: 290
+    },
+    &#34;clouds&#34;: {
+        &#34;all&#34;: 43
+    },
+    &#34;dt&#34;: 1582806769,
+    &#34;sys&#34;: {
+        &#34;type&#34;: 1,
+        &#34;id&#34;: 6845,
+        &#34;country&#34;: &#34;IL&#34;,
+        &#34;sunrise&#34;: 1582776663,
+        &#34;sunset&#34;: 1582817744
+    },
+    &#34;timezone&#34;: 7200,
+    &#34;id&#34;: 294421,
+    &#34;name&#34;: &#34;Lod&#34;,
+    &#34;cod&#34;: 200
+}
+</code></pre>
+<h3 is-upgraded>Decoding the Current Weather</h3>
+<p>In <code>CurrentWeather.swift</code>, copy and paste.</p>
+<pre><code>// MARK: - CurrentWeather
+struct DecodedWeather: Decodable {
+
+    let weather: [Weather]
+    let main: Main
+    let cityName: String
+
+    enum CodingKeys: String, CodingKey {
+        case weather, main
+        case cityName = &#34;name&#34;
+    }
+}
+
+// MARK: - Main
+struct Main: Decodable {
+    let temp: Double
+}
+
+// MARK: - Weather
+struct Weather: Decodable {
+    let type: String
+
+    enum CodingKeys: String, CodingKey {
+        case type = &#34;main&#34;
+    }
+}
+</code></pre>
+<h3 is-upgraded>Mapping DecodedWeather to CurrentWeather</h3>
+<p>Let&#39;s go ahead and create  <code>CurrentWeather</code> structure, that will be used for mapping the decoded response for our convenience.</p>
+<pre><code>struct CurrentWeather: Codable {
+
+    let currentTemp: Int
+    let weatherType: String
+    let cityName: String
+
+    init(weather: DecodedWeather) {
+        self.currentTemp = Int(weather.main.temp.rounded(.toNearestOrEven))
+        self.weatherType = weather.weather.first?.type ?? &#34;&#34;
+        self.cityName = weather.cityName
+    }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating NetworkError" duration="0">
+        <p>In order to handle the various cases of network errors, we&#39;ll create a new group, named <code>Utilities</code>.</p>
+<p>Follow these steps in order to create our Network Manager file:</p>
+<ol type="1">
+<li>Right click our new group, named <code>Utilities</code></li>
+<li>Choose New file..</li>
+<li>Choose <code>Swift</code></li>
+<li>Name it <code>WeatherError.swift</code><br></li>
+</ol>
+<p>create the following cases by copy and pasting these lines of code:</p>
+<pre><code>enum WeatherError: String, Error {
+    case invalidResponse = &#34;Invalid response from the server&#34;
+    case invalidURL = &#34;Invalid url&#34;
+    case unableToComplete = &#34;Unable to complete your request. Please check your internet connection&#34;
+    case invalidData = &#34;The data received from the server was corrupted. Please try again&#34;
+}
+</code></pre>
 
 
       </google-codelab-step>

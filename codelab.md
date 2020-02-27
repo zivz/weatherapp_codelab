@@ -358,7 +358,7 @@ By using private init() our NetworkManager cannot be instantiated more than once
 
 #### Creating our currentWeather Network Call
 Our network call will not get any outside parameters, but rather be using our location coordinates, which will be accessed through a singleton as well.
-We'll use the enumeration to capture information about whether an asychronous call succeeds or fails, and use the associated values for the `Result.success(_:)` and `Result.failure(_:)` cases to carry information about the result of the call.
+We'll use the enumeration to capture information about whether an asynchronous call succeeds or fails, and use the associated values for the `Result.success(_:)` and `Result.failure(_:)` cases to carry information about the result of the call.
 To read more about using result, I've found [this article](https://www.hackingwithswift.com/articles/161/how-to-use-result-in-swift) very helpful.
 
 Go ahead an declare our function under `private init() {}` declaration.
@@ -455,11 +455,145 @@ After the closing braces of our task, insert `task.resume()`
 This line of code will fire our request.
 
 ## Preparing our Data model
+After fetching our data, using the getCurrentWeather request, we'll be using JSON decoder and get our object in hand.
+We'll use decodable for parsing our data.
+Then map our structure to another structure, for our own convenience.
 
 #### Creating a group for our data model
+In order to so, right click on Weather App Folder and Choose `Create New Group`
+Name the group `Model`
 
+Follow these steps in order to create our Network Manager file:
+1. Right click our new group, named `Model`
+2. Choose New file..
+3. Choose `Swift`
+4. Name it `CurrentWeather.swift`
 
+By examining our response, we need to decode the following pieces:
 
+from the first hierarchy we'll need:
+* "name" for the Location label
+
+from weather structure, we'll need:
+* "main" for weather description and image.
+
+from main structure, we'll need:
+* "temp" for weather description.
+
+The current date label will not be taken from the network response.
+
+```
+{
+    "coord": {
+        "lon": 34.91,
+        "lat": 31.99
+    },
+    "weather": [
+        {
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 20.12,
+        "feels_like": 16.12,
+        "temp_min": 17.78,
+        "temp_max": 21.67,
+        "pressure": 1019,
+        "humidity": 46
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 5.1,
+        "deg": 290
+    },
+    "clouds": {
+        "all": 43
+    },
+    "dt": 1582806769,
+    "sys": {
+        "type": 1,
+        "id": 6845,
+        "country": "IL",
+        "sunrise": 1582776663,
+        "sunset": 1582817744
+    },
+    "timezone": 7200,
+    "id": 294421,
+    "name": "Lod",
+    "cod": 200
+}
+```
+
+#### Decoding the Current Weather
+In `CurrentWeather.swift`, copy and paste.
+```Swift
+// MARK: - CurrentWeather
+struct DecodedWeather: Decodable {
+
+    let weather: [Weather]
+    let main: Main
+    let cityName: String
+
+    enum CodingKeys: String, CodingKey {
+        case weather, main
+        case cityName = "name"
+    }
+}
+
+// MARK: - Main
+struct Main: Decodable {
+    let temp: Double
+}
+
+// MARK: - Weather
+struct Weather: Decodable {
+    let type: String
+
+    enum CodingKeys: String, CodingKey {
+        case type = "main"
+    }
+}
+```
+
+#### Mapping DecodedWeather to CurrentWeather  
+Let's go ahead and create  `CurrentWeather` structure, that will be used for mapping the decoded response for our convenience.
+```Swift
+struct CurrentWeather: Codable {
+
+    let currentTemp: Int
+    let weatherType: String
+    let cityName: String
+
+    init(weather: DecodedWeather) {
+        self.currentTemp = Int(weather.main.temp.rounded(.toNearestOrEven))
+        self.weatherType = weather.weather.first?.type ?? ""
+        self.cityName = weather.cityName
+    }
+}
+```
+
+## Creating NetworkError
+In order to handle the various cases of network errors, we'll create a new group, named `Utilities`.
+
+Follow these steps in order to create our Network Manager file:
+1. Right click our new group, named `Utilities`
+2. Choose New file..
+3. Choose `Swift`
+4. Name it `WeatherError.swift`   
+
+create the following cases by copy and pasting these lines of code:
+```Swift
+enum WeatherError: String, Error {
+    case invalidResponse = "Invalid response from the server"
+    case invalidURL = "Invalid url"
+    case unableToComplete = "Unable to complete your request. Please check your internet connection"
+    case invalidData = "The data received from the server was corrupted. Please try again"
+}
+```
 
 ## Connecting the UI To Our View controller
 
