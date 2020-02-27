@@ -264,8 +264,217 @@ Once a weather description will be parsed, it will be associated to a local imag
 
 In order to import the resources to our project, simply go to `Assets.xcassets` folder and drag the images after being extracted from the attached zip.
 
+## Preparing our Network Manager - Part 1
+Before we begin go to our project navigator, and create a new group, named `Managers`.
+In order to so, right click on Weather App Folder and Choose `Create New Group`
+A group in Xcode was used to be a "FAKE" folder, but now a days a group is actually a folder.
+A group without folder is used in order to organize files in your project without affecting the structure on the actual file system.  
+
+You can read more about groups and folder in [stackoverflow.com](https://stackoverflow.com/questions/34207664/difference-between-folder-and-group-in-xcode)
+
+Follow these steps in order to create our Network Manager file:
+1. Right click our new group, named `Network Manager` c
+2. Choose New file..
+3. Choose `Swift`
+4. name it `NetworkManager.swift`
+
+#### Open Weather API
+In order to fetch data from the network, we'll be using open weather api.
+Feel free to self explore the API, but for now we'll use the `Current Weather API` only.  
+
+In order to get the current weather, there are several options:
+* Get the weather by city name
+* Get the weather by city id
+* Get the weather by geographic coordinates. **This is the request we'll be using**
+* Get the weather by zip code
+
+#### Getting weather by geographic coordinates
+As specified in [Current Weather API](https://openweathermap.org/current)  
+We'll need to pass the network call the latitude and longitude coordinates, as well as an api key.
+In order to create an api key, you'll be required to [Subscribe](https://openweathermap.org/appid) to Open weather API.
+
+The API call will look as so:  
+`api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={your api key}`
+
+#### Creating a structure for our End Point
+In `NetworkManager.swift` We'll insert a structure for our end point.
+The structure is using URL Components, will save us typos, bugs and will be easier to use, later in our API Calls.
+The structure is based on [Constructing URLs in Swift article](https://www.swiftbysundell.com/articles/constructing-urls-in-swift)
+
+go ahead and copy these lines to our `NetworkManager.swift`  
 ```swift
-func getSomething(){
+private struct EndPoints {
+    private struct Path {
+        static let weather = "/data/2.5/weather"
+    }
+
+    private static let base_url = "api.openweathermap.org"
+
+    private struct QueryParams {
+        static let latitude = "lat"
+        static let longitude = "lon"
+        static let app_id = "appid"
+        static let mode = "mode"
+        static let units = "units"
+    }
+
+    private struct QueryValues {
+        static let api_key = "insert your apikey"
+        static let units = "metric"
+        static let latitude = Location.shared.latitude!
+        static let longitude = Location.shared.longitude!
+    }
+
+    static var currentWeatherURL: URL? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = EndPoints.base_url
+        components.path = Path.weather
+        components.queryItems = [
+            URLQueryItem(name: QueryParams.latitude, value: String(Location.shared.latitude!)),
+            URLQueryItem(name: QueryParams.longitude, value: String(Location.shared.longitude!)),
+            URLQueryItem(name: QueryParams.app_id, value: QueryValues.api_key),
+            URLQueryItem(name: QueryParams.units, value: QueryValues.units)
+        ]
+
+        return components.url
+
+    }
+```
+
+## Preparing our Network Manager - Part 2
+Will now create our Network Manager, the Network Manager is a singleton.
+
+#### Create our singleton
+Copy these lines of code, under our EndPoints structure.
+```swift
+  class NetworkManager {
+    static let shared = NetworkManager()
+    private init() {}
+  }
+```
+
+By using private init() our NetworkManager cannot be instantiated more than once, hence, it's a singleton.
+
+#### Creating our currentWeather Network Call
+Our network call will not get any outside parameters, but rather be using our location coordinates, which will be accessed through a singleton as well.
+We'll use the enumeration to capture information about whether an asychronous call succeeds or fails, and use the associated values for the `Result.success(_:)` and `Result.failure(_:)` cases to carry information about the result of the call.
+To read more about using result, I've found [this article](https://www.hackingwithswift.com/articles/161/how-to-use-result-in-swift) very helpful.
+
+Go ahead an declare our function under `private init() {}` declaration.
+```swift
+
+func getCurrentWeather(completionHandler: @escaping (Result<CurrentWeather, WeatherError>) -> Void ) {
 
 }
 ```
+
+Notice that we're using our CurrentWeather, and WeatherError as the success and failure cases.
+We'll create the `Current Weather Model` and `WeatherError` very soon.
+
+#### Creating our data task
+Our data task, which will handle the api call will be consisted from constructing the url, firing the request and handling the response.
+
+Let's create the url
+
+in our function, copy and paste these lines of code:
+```swift
+  guard let url = EndPoints.currentWeatherURL else {
+      completionHandler(.failure(.invalidURL))
+      return
+  }
+```
+
+This part was easy, since we were using our EndPoints structure.
+We also had to handle an error, since the url is optional and we don't want to continue if the url is `nil`.
+In that case we'll return a failure case, the failure case is expecting an error, so we provided our WeatherError enum with invalidUrl.
+
+Let's fire our task, will be using URLSession.  
+URLSession provides and API for downloading data from and uploading data to endpoints indicated by URLs.
+You can read more about URLSession [here](https://developer.apple.com/documentation/foundation/urlsession), [here](https://www.raywenderlich.com/3244963-urlsession-tutorial-getting-started) and [here](https://learnappmaking.com/urlsession-swift-networking-how-to/)
+
+under our guard statement, copy and paste this line of code
+
+```Swift
+  let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+  }
+```
+
+We now see that our dataTask, using the url we've created, the completionHandler of the task either returns us data, response and error.
+
+#### Handling the error  
+error means there was a transport error, either by sending the request, or receiving the response.
+
+to handle the error copy and paste these lines of code:
+```Swift
+  if let _ = error {
+      completionHandler(.failure(.unableToComplete))
+      return
+  }
+```
+
+#### Handling the response
+We're expecting for response code of 200, so any other response code will indicate us an error.
+to handle responses other than 200, copy and paste these lines of code:
+```Swift
+guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+    completionHandler(.failure(.unableToComplete))
+    return
+}
+```
+
+####Handling our data
+We're expecting for data, so we'll again handle the case we don't get any data.
+to handle corrupted data, copy and paste these lines of code:
+```Swift
+guard let data = data else {
+    completionHandler(.failure(.invalidData))
+    return
+}
+```
+####Decoding our data
+We'll be using JSONDecoder, since our data will be serialized to JSON,
+Then we'd like to parse our JSON into an object, which will be our DecodedWeather structure.
+We'll then map for our own convenience DecodedWeather to CurrentWeather which will contain the data in the structure we want.
+
+go ahead and copy these lines of code under data closing braces:
+```Swift
+  do {
+      let decoder = JSONDecoder()
+      let decodedWeather = try decoder.decode(DecodedWeather.self, from: data)
+      let currentWeather = CurrentWeather(weather: decodedWeather)
+      completionHandler(.success(currentWeather))
+  } catch {
+      completionHandler(.failure(.invalidData))
+  }
+```
+
+####Firing the request
+After the closing braces of our task, insert `task.resume()`
+This line of code will fire our request.
+
+## Preparing our Data model
+
+#### Creating a group for our data model
+
+
+
+
+## Connecting the UI To Our View controller
+
+#### Renaming our View controller
+In order to rename our view controller follows these steps:
+1. In Project Navigator click on `ViewController.swift`
+2. Click again, and rename to `WeatherVC.swift`
+3. Open the file and change the class name:
+  * In the description heather
+  * In the class declaration
+4. **Our Storyboard doesn't know who's WeatherVC**, Open `Main.storyboard`
+  * Click on the View Controller Scene
+  * In utilities pane click on `identity inspector`  
+  ![Identity Inspector](./assets/Identity_Inspector.png)
+  * Change the class in custom class to `WeatherVC`
+
+## Connecting outlets from interface builder
+In order that `WeatherVC` will handle the logic for
