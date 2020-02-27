@@ -576,7 +576,30 @@ struct CurrentWeather: Codable {
 }
 ```
 
-## Creating NetworkError
+## Creating Location Model
+In order to save the location, retrieved by `Core Location` and upon `When in use authorization` permission  
+we'll create another file for saving the `Location` Model.
+
+Follow these steps in order to create our Location file:
+1. Right click our new group, named `Utilities`
+2. Choose New file..
+3. Choose `Swift`
+4. Name it `Location.swift`
+
+Add the following code, so we'll have Location as singleton, we'll also need to save only two attributes, which are the `latitude` and `longitude`.
+
+```Swift
+class Location {
+    static var shared = Location()
+
+    private init() {}
+
+    var latitude: Double!
+    var longitude: Double!
+}
+```
+
+## Creating WeatherError
 In order to handle the various cases of network errors, we'll create a new group, named `Utilities`.
 
 Follow these steps in order to create our WeatherError file:

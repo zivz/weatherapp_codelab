@@ -539,7 +539,30 @@ struct Weather: Decodable {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Creating NetworkError" duration="0">
+      <google-codelab-step label="Creating Location Model" duration="0">
+        <p>In order to save the location, retrieved by <code>Core Location</code> and upon <code>When in use authorization</code> permission<br> we&#39;ll create another file for saving the <code>Location</code> Model.</p>
+<p>Follow these steps in order to create our Location file:</p>
+<ol type="1">
+<li>Right click our new group, named <code>Utilities</code></li>
+<li>Choose New file..</li>
+<li>Choose <code>Swift</code></li>
+<li>Name it <code>Location.swift</code></li>
+</ol>
+<p>Add the following code, so we&#39;ll have Location as singleton, we&#39;ll also need to save only two attributes, which are the <code>latitude</code> and <code>longitude</code>.</p>
+<pre><code>class Location {
+    static var shared = Location()
+
+    private init() {}
+
+    var latitude: Double!
+    var longitude: Double!
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating WeatherError" duration="0">
         <p>In order to handle the various cases of network errors, we&#39;ll create a new group, named <code>Utilities</code>.</p>
 <p>Follow these steps in order to create our WeatherError file:</p>
 <ol type="1">
