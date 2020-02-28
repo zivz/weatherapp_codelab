@@ -653,7 +653,7 @@ Follow these steps in order to create our Date+Ext file:
 
 Using [this web site](https://nsdateformatter.com), eases our life dealing with formatting.
 Since we want our Date to Include Month, day and year we'll play with the format in the above link and copy the format.  
-![Date Format][./assets/DateFormat.png]
+![Date Format](./assets/DateFormat.png)
 
 in our file, insert the following code:
 ```Swift
