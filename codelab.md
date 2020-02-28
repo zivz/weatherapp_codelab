@@ -265,7 +265,7 @@ Once a weather description will be parsed, it will be associated to a local imag
 In order to import the resources to our project, simply go to `Assets.xcassets` folder and drag the images after being extracted from the attached zip.
 
 ## MVC Design Pattern
-Apple's recommended architectural pattern, Model-View-Controller or MVC for short.
+Apple's recommended architectural pattern, Model-View-Controller or MVC for short.  
 MVC is a software development pattern made up of three main objects:
 * The **Model** is where your data resides. in our case the model will be things like:
   * The networking code.
@@ -713,7 +713,7 @@ In order to view `WeatherVC` side by side with our storyboard, follow these step
 ![Adjust Editor Options](./assets/Adjust_Editor_Options.png)
 * Choose `Assistant`
 * Our `Main.storyboard` should open the View Controller associated with the scene that is currently in focus.
-Since We have only once scene, and only one View Controller, it will open WeatherVC.Swift on the side.
+Since We have only one scene, and only one View Controller, it will open WeatherVC.Swift on the side.
 
 #### Creating outlets for our UI Elements
 Connecting our UI Elements in `WeatherVC Scene` to our `WeatherVC` class, requires an Interface Builder outlet.
