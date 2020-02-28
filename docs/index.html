@@ -616,7 +616,10 @@ struct Weather: Decodable {
       </google-codelab-step>
     
       <google-codelab-step label="Connecting the UI To Our View controller" duration="0">
-        <h3 is-upgraded>Renaming our View controller</h3>
+        <p>In order to control our UI elements and handle the logic related to them, we need to connect our UI to a View Controller. Currently our <code>Main.storyboard</code> has a scene, named <code>View Controller Scene</code>, and by viewing its Identity Inspector we see its class is <code>ViewController.swift</code>.</p>
+<p>Positive: <strong>Reminder:</strong> Having Main.storyboard and a ViewController associated to it, came out of the box, since we created a <code>Single View</code> Template while we created the project.</p>
+<p>Negative: <code>ViewController.swift</code> class has no code related to our logic, and even before we start writing any code in it, its name doesn&#39;t reflect its responsibility.  So before we start connecting our UI Elements to the ViewController we&#39;ll first rename it.</p>
+<h3 is-upgraded>Renaming our View controller</h3>
 <p>In order to rename our view controller follows these steps:</p>
 <ol type="1">
 <li>In Project Navigator click on <code>ViewController.swift</code></li>
@@ -638,7 +641,33 @@ struct Weather: Decodable {
       </google-codelab-step>
     
       <google-codelab-step label="Connecting outlets from interface builder" duration="0">
-        <p>In order that <code>WeatherVC</code> will handle the logic for</p>
+        <h3 is-upgraded>Showing our View Controller Scene aside of our View Controller</h3>
+<p>In order that <code>WeatherVC</code> will handle the logic for our UI Elements we need to connect them to our class.<br> Before we start doing that we&#39;ll prepare Xcode and change the layout so we can view the elements and the code side by side.</p>
+<p>In order to view <code>WeatherVC</code> side by side with our storyboard, follow these steps:</p>
+<ul>
+<li>Open <code>Main.storyboard</code></li>
+<li>In editor view - click on <code>Adjust Editor Options</code> button.<br><img alt="Adjust Editor Options" src="img/36dbf6f2ae5a5806.png"></li>
+<li>Choose <code>Assistant</code></li>
+<li>Our <code>Main.storyboard</code> should open the View Controller associated with the scene that is currently in focus. Since We have only once scene, and only one View Controller, it will open WeatherVC.Swift on the side.</li>
+</ul>
+<h3 is-upgraded>Creating outlets for our UI Elements</h3>
+<p>Connecting our UI Elements in <code>WeatherVC Scene</code> to our <code>WeatherVC</code> class, requires an Interface Builder outlet. Creating an outlet is simple as dragging our element to the code.</p>
+<p>In order to create an outlet follow these steps:</p>
+<ul>
+<li>Open document outline and select the UI element, let&#39;s start with our <code>Date Label</code>.</li>
+<li>Drag the element when holding the <code>^</code>/<code>Ctrl</code> button to <code>WeatherVC.swift</code></li>
+<li>When the dialog opens, choose connection as <code>Outlet</code></li>
+<li>Give the outlet a meaningful name, such as <code>dateLabel</code></li>
+<li>Verify the type is as expected UILabel for label, or UIImageView for Image view.</li>
+<li>Verify the reference is weak.<br><img alt="Outlet" src="img/d753ebd95d40e64.gif"></li>
+<li><strong>Repeat The steps above for all our elements</strong> :  <ul>
+<li><code>Current Temp Label</code></li>
+<li><code>Location Label</code></li>
+<li><code>Current Weather Image</code></li>
+<li><code>Current Weather Type Label</code></li>
+</ul>
+</li>
+</ul>
 
 
       </google-codelab-step>

@@ -656,9 +656,16 @@ func currentDate() -> String {
 }
 ```
 
-
-
 ## Connecting the UI To Our View controller
+
+In order to control our UI elements and handle the logic related to them, we need to connect our UI to a View Controller.
+Currently our `Main.storyboard` has a scene, named `View Controller Scene`, and by viewing its Identity Inspector we see its class is `ViewController.swift`.
+
+Positive:
+**Reminder:** Having Main.storyboard and a ViewController associated to it, came out of the box, since we created a `Single View` Template while we created the project.
+
+Negative:
+`ViewController.swift` class has no code related to our logic, and even before we start writing any code in it, its name doesn't reflect its responsibility.  So before we start connecting our UI Elements to the ViewController we'll first rename it.
 
 #### Renaming our View controller
 In order to rename our view controller follows these steps:
@@ -674,4 +681,34 @@ In order to rename our view controller follows these steps:
   * Change the class in custom class to `WeatherVC`
 
 ## Connecting outlets from interface builder
-In order that `WeatherVC` will handle the logic for
+
+#### Showing our View Controller Scene aside of our View Controller
+
+In order that `WeatherVC` will handle the logic for our UI Elements we need to connect them to our class.  
+Before we start doing that we'll prepare Xcode and change the layout so we can view the elements and the code side by side.
+
+In order to view `WeatherVC` side by side with our storyboard, follow these steps:
+* Open `Main.storyboard`
+* In editor view - click on `Adjust Editor Options` button.  
+![Adjust Editor Options](./assets/Adjust_Editor_Options.png)
+* Choose `Assistant`
+* Our `Main.storyboard` should open the View Controller associated with the scene that is currently in focus.
+Since We have only once scene, and only one View Controller, it will open WeatherVC.Swift on the side.
+
+#### Creating outlets for our UI Elements
+Connecting our UI Elements in `WeatherVC Scene` to our `WeatherVC` class, requires an Interface Builder outlet.
+Creating an outlet is simple as dragging our element to the code.
+
+In order to create an outlet follow these steps:
+* Open document outline and select the UI element, let's start with our `Date Label`.
+* Drag the element when holding the `^`/`Ctrl` button to `WeatherVC.swift`
+* When the dialog opens, choose connection as `Outlet`
+* Give the outlet a meaningful name, such as `dateLabel`
+* Verify the type is as expected UILabel for label, or UIImageView for Image view.
+* Verify the reference is weak.  
+![Outlet](./assets/CreatingOutlet.gif)
+* **Repeat The steps above for all our elements** :
+  * `Current Temp Label`
+  * `Location Label`
+  * `Current Weather Image`
+  * `Current Weather Type Label`
