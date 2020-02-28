@@ -264,6 +264,26 @@ Once a weather description will be parsed, it will be associated to a local imag
 
 In order to import the resources to our project, simply go to `Assets.xcassets` folder and drag the images after being extracted from the attached zip.
 
+## MVC Design Pattern
+Apple's recommended architectural pattern, Model-View-Controller or MVC for short.
+MVC is a software development pattern made up of three main objects:
+* The **Model** is where your data resides. in our case the model will be things like:
+  * The networking code.
+  * Managers like our location manager.
+  * Model Objects, such as our CurrentWeather object.
+
+* The **View** Layer is the face of our app. Its classes are reusable as they don't contain any domain-specific logic. For example, a `UILabel` is a view that represents a text on the screen, and it's reusable.
+In our case, our view will be coupled with our controller.
+
+* The **Controller** mediates between the view and the model.
+In our case, we'll not have any user-interaction, but instead request for data from our API, use our model, and update the view, using our controller.
+
+![MVC Diagram](./assets/MVC-Diagram.png)
+
+Resources:
+* [raywanderlich.com](https://www.raywenderlich.com/1000705-model-view-controller-mvc-in-ios-a-modern-approach)
+* [learnappmaking.com](https://learnappmaking.com/model-view-controller-mvc-swift/)  
+
 ## Preparing our Network Manager - Part 1
 Before we begin go to our project navigator, and create a new group, named `Managers`.
 In order to so, right click on Weather App Folder and Choose `Create New Group`

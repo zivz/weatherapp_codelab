@@ -280,6 +280,28 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="MVC Design Pattern" duration="0">
+        <p>Apple&#39;s recommended architectural pattern, Model-View-Controller or MVC for short. MVC is a software development pattern made up of three main objects:</p>
+<ul>
+<li>The <strong>Model</strong> is where your data resides. in our case the model will be things like:<ul>
+<li>The networking code.</li>
+<li>Managers like our location manager.</li>
+<li>Model Objects, such as our CurrentWeather object.</li>
+</ul>
+</li>
+<li>The <strong>View</strong> Layer is the face of our app. Its classes are reusable as they don&#39;t contain any domain-specific logic. For example, a <code>UILabel</code> is a view that represents a text on the screen, and it&#39;s reusable. In our case, our view will be coupled with our controller.</li>
+<li>The <strong>Controller</strong> mediates between the view and the model. In our case, we&#39;ll not have any user-interaction, but instead request for data from our API, use our model, and update the view, using our controller.</li>
+</ul>
+<p class="image-container"><img alt="MVC Diagram" src="img/29f23cdaeee308c5.png"></p>
+<p>Resources:</p>
+<ul>
+<li><a href="https://www.raywenderlich.com/1000705-model-view-controller-mvc-in-ios-a-modern-approach" target="_blank">raywanderlich.com</a></li>
+<li><a href="https://learnappmaking.com/model-view-controller-mvc-swift/" target="_blank">learnappmaking.com</a><br></li>
+</ul>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Preparing our Network Manager - Part 1" duration="0">
         <p>Before we begin go to our project navigator, and create a new group, named <code>Managers</code>. In order to so, right click on Weather App Folder and Choose <code>Create New Group</code> A group in Xcode was used to be a &#34;FAKE&#34; folder, but now a days a group is actually a folder. A group without folder is used in order to organize files in your project without affecting the structure on the actual file system.</p>
 <p>You can read more about groups and folder in <a href="https://stackoverflow.com/questions/34207664/difference-between-folder-and-group-in-xcode" target="_blank">stackoverflow.com</a></p>
