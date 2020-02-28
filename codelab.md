@@ -732,3 +732,13 @@ In order to create an outlet follow these steps:
   * `Location Label`
   * `Current Weather Image`
   * `Current Weather Type Label`
+
+#### Verify your connections
+By using the `utilities`/`inspectors` pane, we can use the connections inspector to verify everything is in place:
+* Choose our View Controller Scene, e.g, `WeatherVC Scene`   
+* Reveal the Utilities pane by clicking on the right button.  
+![UtilitiesPane](./assets/UtilitiesPane.png)
+* Click on the right most button, which the connections inspector.
+* You should see all our connections, I've marked those you should be familiar with in the rectangular area.
+![ConnectionsInspector](./assets/ConnectionsInspector.png)
+* verify the all your connections appears with a filled circle.  
