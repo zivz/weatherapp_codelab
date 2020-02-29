@@ -456,17 +456,19 @@
 <li>Name it <code>CurrentWeather.swift</code></li>
 </ol>
 <p>By examining our response, we need to decode the following pieces:</p>
-<p>from the first hierarchy we&#39;ll need:</p>
 <ul>
+<li>From the first hierarchy we&#39;ll need:  <ul>
 <li>&#34;name&#34; for the Location label</li>
 </ul>
-<p>from weather structure, we&#39;ll need:</p>
-<ul>
+</li>
+<li>From weather structure, we&#39;ll need:  <ul>
 <li>&#34;main&#34; for weather description and image.</li>
 </ul>
-<p>from main structure, we&#39;ll need:</p>
-<ul>
+</li>
+<li>From main structure, we&#39;ll need:  <ul>
 <li>&#34;temp&#34; for weather description.</li>
+</ul>
+</li>
 </ul>
 <p>The current date label will not be taken from the network response.</p>
 <pre><code>{
@@ -639,8 +641,9 @@ struct Weather: Decodable {
     
       <google-codelab-step label="Connecting the UI To Our View controller" duration="0">
         <p>In order to control our UI elements and handle the logic related to them, we need to connect our UI to a View Controller. Currently our <code>Main.storyboard</code> has a scene, named <code>View Controller Scene</code>, and by viewing its Identity Inspector we see its class is <code>ViewController.swift</code>.</p>
-<p>Positive: <strong>Reminder:</strong> Having Main.storyboard and a ViewController associated to it, came out of the box, since we created a <code>Single View</code> Template while we created the project.</p>
-<p>Negative: <code>ViewController.swift</code> class has no code related to our logic, and even before we start writing any code in it, its name doesn&#39;t reflect its responsibility.  So before we start connecting our UI Elements to the ViewController we&#39;ll first rename it.</p>
+<aside class="special"><p><strong>Reminder:</strong> Having Main.storyboard and a ViewController associated to it, came out of the box, since we created a <code>Single View</code> Template while we created the project.</p>
+</aside>
+<p>Negative:<code>ViewController.swift</code> class has no code related to our logic, and even before we start writing any code in it, its name doesn&#39;t reflect its responsibility.  So before we start connecting our UI Elements to the ViewController we&#39;ll first rename it.</p>
 <h3 is-upgraded>Renaming our View controller</h3>
 <p>In order to rename our view controller follows these steps:</p>
 <ol type="1">
@@ -706,10 +709,10 @@ struct Weather: Decodable {
       <google-codelab-step label="Location Manager" duration="0">
         <h3 is-upgraded>Location Permission</h3>
 <p>In order to fetch the user&#39;s location we&#39;ll first need the user&#39;s permission.</p>
-<p>from <a href="https://medium.com/rakutenready/requesting-location-permissions-in-ios-9e5a3b814a8b" target="_blank">medium.com</a> iOS apps can support one of two levels of location access:</p>
+<p>From <a href="https://medium.com/rakutenready/requesting-location-permissions-in-ios-9e5a3b814a8b" target="_blank">medium.com</a> iOS apps can support one of two levels of location access:</p>
 <ul>
-<li>While using the app The app can access the device&#39;s location when the app is in use. This is also known as &#34;when-in-use authorization.&#34;</li>
-<li>Always The app can access the device&#39;s location either when app is in use or in the background.</li>
+<li><strong>While using the app<br></strong> The app can access the device&#39;s location when the app is in use. This is also known as &#34;when-in-use authorization.&#34;</li>
+<li><strong>Always<br></strong> The app can access the device&#39;s location either when app is in use or in the background.</li>
 </ul>
 <p>Since we don&#39;t need to Always use the user&#39;s location, we&#39;ll request the user to allow location <code>While using the app</code>. <code>While using the app</code>, is also referred in Apple&#39;s Terminology as <code>when-in-use</code>.</p>
 <h3 is-upgraded>Telling the user we need its permission</h3>
@@ -754,7 +757,8 @@ struct Weather: Decodable {
 }
 </code></pre>
 <p>Reading the function above makes lots of sense, but how does it work? By conforming to the location manager delegate and using the function above, we get an update if the authorization has changed. Now comes the <code>WeatherVC</code> part where by filling the function body we do what we want if this update occurs. We want to start updating the location if the user&#39;s location is authorized. In Any other case we want to nudge the user and ask for its permission so we can continue working.</p>
-<p>Negative: What happens if We do get authorization, but location services are disabled? iOS already handled the work for us, no worries.</p>
+<aside class="warning"><p>What happens if We do get authorization, but location services are disabled? iOS already handled the work for us, no worries.</p>
+</aside>
 <h3 is-upgraded>Updating the location upon authorization</h3>
 <p>In order to update our <code>Location</code> model with the location we need to use the delegates function related to updatingLocation. This is where <code>func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])</code> comes to help.</p>
 <p>Go ahead and add the following lines of code to our extension:</p>
@@ -766,7 +770,8 @@ struct Weather: Decodable {
     fetchData()
 }
 </code></pre>
-<p>Negative: <code>fetchData()</code> is a function in our WeatherVC we&#39;ll handle later. no worries.</p>
+<aside class="warning"><p><code>fetchData()</code> is a function in our WeatherVC we&#39;ll handle later. no worries.</p>
+</aside>
 <h3 is-upgraded>Dealing with Errors</h3>
 <p>Checking our errors handling in the beginning, we already took care of:</p>
 <ul>
@@ -779,7 +784,8 @@ struct Weather: Decodable {
     self.showAlertOnMain(title: &#34;Check your location&#34;, message: &#34;Your location seems to be none&#34;)
 }
 </code></pre>
-<p>Negative: <code>showAlertOnMain</code> is an extension we&#39;ll later add for our ViewController in order to handle alerts</p>
+<aside class="warning"><p><code>showAlertOnMain</code> is an extension we&#39;ll later add for our ViewController in order to handle alerts</p>
+</aside>
 <h3 is-upgraded>Adding the missing parts in WeatherVC</h3>
 <p>We just miss some parts so we can tell the CLLocationManagerDelegate that we&#39;ll do the work for me. Remember, the delegate knows the information, and we do the rest of the work for him.</p>
 <p>Follow these steps in order to fully conform to <code>CLLocationManagerDelegate</code>:</p>

@@ -489,15 +489,12 @@ Follow these steps in order to create our Network Manager file:
 4. Name it `CurrentWeather.swift`
 
 By examining our response, we need to decode the following pieces:
-
-from the first hierarchy we'll need:
-* "name" for the Location label
-
-from weather structure, we'll need:
-* "main" for weather description and image.
-
-from main structure, we'll need:
-* "temp" for weather description.
+* From the first hierarchy we'll need:
+  * "name" for the Location label
+* From weather structure, we'll need:
+  * "main" for weather description and image.
+* From main structure, we'll need:
+  * "temp" for weather description.
 
 The current date label will not be taken from the network response.
 
@@ -747,11 +744,11 @@ By using the `utilities`/`inspectors` pane, we can use the connections inspector
 #### Location Permission
 In order to fetch the user's location we'll first need the user's permission.
 
-from [medium.com](https://medium.com/rakutenready/requesting-location-permissions-in-ios-9e5a3b814a8b)
+From [medium.com](https://medium.com/rakutenready/requesting-location-permissions-in-ios-9e5a3b814a8b)
 iOS apps can support one of two levels of location access:
-* While using the app
+* **While using the app**  
   The app can access the device’s location when the app is in use. This is also known as “when-in-use authorization.”
-* Always
+* **Always**  
   The app can access the device’s location either when app is in use or in the background.
 
 Since we don't need to Always use the user's location, we'll request the user to allow location `While using the app`.
