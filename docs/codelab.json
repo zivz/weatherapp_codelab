@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-02-29T14:33:59+02:00",
+  "updated": "2020-02-29T18:17:33+02:00",
   "id": "docs",
   "duration": 6,
   "title": "Creating your first iOS App",
@@ -21,6 +21,6 @@
   "tags": [
     "ios"
   ],
-  "feedback": "https://github.com/zivz/WeatherApp",
+  "feedback": "https://github.com/zivz/weatherapp_codelab",
   "url": "docs"
 }

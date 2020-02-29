@@ -4,7 +4,7 @@ id: docs
 categories: codelab, swift, ios
 environments: ios
 status: Published
-feedback link: https://github.com/zivz/WeatherApp
+feedback link: https://github.com/zivz/weatherapp_codelab
 
 # Creating your first iOS App
 
@@ -22,6 +22,8 @@ The primary view will contain two subviews:
 * A view for the current weather
 * A table view for the next 10 days forecast.
 
+![WeatherApp](./assets/WeatherApp.png)
+
 **API**  
 The app will interact with Open Weather API, in order to fetch the current weather, and the forecast.  
 
@@ -30,7 +32,7 @@ The app will fetch the user's location, upon `When in use authorization` permiss
 
 **Notes:**
 * The tutorial will focus on Storyboards, Autolayout and UIStackView.  
-* The tutorial will include the current weather view only  
+* The tutorial **will include the current weather view only**.  
 * Location Handler, Networking, Parsing code will be provided in order to provide the full capabilities of the app.  
 * The app is extendable for further implementation of the next 10 days forecast.  
 * Tableview displaying the forecast for the next 10 days implementation is still available in github.  
@@ -90,19 +92,19 @@ Our Primary View will contain 2 Subviews.
 
 #### Current Weather view
 Will be consisted of 2 parts   
-* Part 1 - General Info
+* **Part 1** - General Info
   * Current date
   * Current Temperature in Celsius
   * Current Location
-* Part 2 - Weather Description
+* **Part 2** - Weather Description
   * An Image of Weather Type
   * Weather Description
 
 ![Current Weather View](./assets/CurrentWeatherView.png)
 
-## Current Weather UI Terminology
+## Appendix - UI Terms in Xcode
 
-In this section we'll create the Current Weather UI, using Storyboard, Autolayout and StackView.
+In this section we'll get familiar with some terms related to UI in Xcode.
 
 #### Storyboard
 From [raywanderlich.com](https://www.raywenderlich.com/5055364-ios-storyboards-getting-started) - Storyboards are an exciting feature first introduced in iOS 5, which save time building user interfaces for your apps. Storyboards allow you to prototype and design multiple view controller views within one file, and also let you create transitions between view controllers.
@@ -129,11 +131,11 @@ As seen in the image capture below, **Current Weather View** and **Weather Forec
 ![WeatherApp Subviews](./assets/TwoViews.png "Current Weather View and Forecast Table View")  
 We'll create this view and later pile up our detailed UI Elements.  
 
-We're basically going to add the blue view, holding our detailed UI Elements as in the 3d capture below.
+We're basically going to add the blue view, holding our detailed UI Elements as in the 3D capture below.
 ![Current Weather 3D Capture](./assets/Current_Weather_3D.png "Current Weather 3D Capture")
 
-In order to do so, follow the following steps:
-1. open Main.storyboard
+In order to do so, follow these steps:
+1. Open `Main.storyboard`
   1. You should currently see a View inside the View Controller hierarchy.  
   ![View Controller Scene](./assets/View_Controller_Scene.png "View Controller Scene")
 2. Tap on the `+` Button in the right top corner, in order to reveal the `Object Library`  
@@ -144,7 +146,7 @@ In order to do so, follow the following steps:
 
 ### Setting our view constraints
 
-**Before we start follow the steps below, that we'll help us figure out how view looks like:**
+**Before we continue, follow the steps below. These steps will help us differentiating the view we've just created from its parent view:**
 * Go to the view attributes, and set its color to `System Teal Color`.  
 ![Current Weather View Teal Color](./assets/CurrentWeatherView_TealColor.png "Current Weather View Teal Color")
 * change the View name to a meaningful name such as `Current Weather View`
@@ -191,7 +193,7 @@ The red view refers to the General Info View, while the green view refers to the
 
 ![Current Weather View](./assets/CurrentWeatherView.png "Current Weather View")
 
-Using Stack Views will ease our development process, simplify our constraints logic and will be easier if we'll want to make changes in our UI in the future.
+Using Stack Views will ease our development process, simplify our constraints logic and will be easier for maintenance if we'll want to make changes in our UI in the future.
 Using Stack Views comes naturally as one view, can be "treated" as an array of 3 vertical elements, while the other has 2 vertical elements.
 
 Negative
@@ -201,7 +203,7 @@ other than those suggested in the paragraph below, In order to notice the differ
 #### The Current Weather General Info Stack View Properties
 * Axis - As Our elements are stacked vertically, we'll choose `Vertical`.
 * Alignment - We'd like our elements to fill the container, we'll choose `Fill`.
-* Distribution - We'd like our elements to be distributed as a proportions of their label size, hence we'll choose `Fill Proportionally`.
+* Distribution - We'd like our elements to be distributed proportionally by their label size, hence we'll choose `Fill Proportionally`.
 * Spacing - is redundant here since Our Distribution defines the way the items will be spaced.
 
 ![Info Stack View](./assets/Info_Stack_View_Attributes.png)
@@ -389,7 +391,7 @@ func getCurrentWeather(completionHandler: @escaping (Result<CurrentWeather, Weat
 ```
 
 Notice that we're using our CurrentWeather, and WeatherError as the success and failure cases.
-We'll create the `Current Weather Model` and `WeatherError` very soon.
+We'll create the `Current Weather` model and `WeatherError` very soon.
 
 #### Creating our data task
 Our data task, which will handle the api call will be consisted from constructing the url, firing the request and handling the response.
@@ -794,7 +796,7 @@ Resources:
 [CLLocationManagerDelegate](https://www.google.com/search?client=safari&rls=en&q=CLLocationManagerDelegate&ie=UTF-8&oe=UTF-8)
 
 
-### What do we need from Location Manager Delegate?
+### What information does "Location Manager Delegate" hold?
 Let's ask ourselves what do we need to know?
 * We basically need to update our `CurrentLocation` with you guessed, the Current Location.
 * We also need to handle errors such as:
