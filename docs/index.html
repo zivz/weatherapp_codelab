@@ -697,8 +697,92 @@ struct Weather: Decodable {
 <li>Reveal the Utilities pane by clicking on the right button.<br><img alt="UtilitiesPane" src="img/5bf8bcbea69defe8.png"></li>
 <li>Click on the right most button, which the connections inspector.</li>
 <li>You should see all our connections, I&#39;ve marked those you should be familiar with in the rectangular area. <img alt="ConnectionsInspector" src="img/c55b02944097d9f.png"></li>
-<li>verify the all your connections appears with a filled circle.<br></li>
+<li>verify that all your connections appears with a filled circle.<br></li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Location Manager" duration="0">
+        <h3 is-upgraded>Location Permission</h3>
+<p>In order to fetch the user&#39;s location we&#39;ll first need the user&#39;s permission.</p>
+<p>from <a href="https://medium.com/rakutenready/requesting-location-permissions-in-ios-9e5a3b814a8b" target="_blank">medium.com</a> iOS apps can support one of two levels of location access:</p>
+<ul>
+<li>While using the app The app can access the device&#39;s location when the app is in use. This is also known as &#34;when-in-use authorization.&#34;</li>
+<li>Always The app can access the device&#39;s location either when app is in use or in the background.</li>
+</ul>
+<p>Since we don&#39;t need to Always use the user&#39;s location, we&#39;ll request the user to allow location <code>While using the app</code>. <code>While using the app</code>, is also referred in Apple&#39;s Terminology as <code>when-in-use</code>.</p>
+<h3 is-upgraded>Telling the user we need its permission</h3>
+<p>In order to tell the user we need its permission to access the location <code>when-in-use</code>, we need to display the user an alert. As seen in the image below, the only thing we need to take care about is the <code>Message</code> body. <img alt="LocationRequestAlert" src="img/43164e5db61fb40d.png"> The Title and Buttons are already taken care of.</p>
+<p>Now, just another question is left an-unanswered. How do we edit the usage description?</p>
+<ul>
+<li>Open <code>info.plist</code></li>
+<li>Add a new key named <code>Privacy - Location When In Use Usage Description</code></li>
+<li>Add a value that will represent the message we want to show the user.  <ul>
+<li>We need your location to give you relevant, up-to-date weather information.</li>
+</ul>
+</li>
+</ul>
+<h3 is-upgraded>Location Manager Delegate</h3>
+<p>Now, that we have the user&#39;s permission, how can we tell our <code>WeatherVC</code> that our location was authorized? How can we tell our ViewController that our location has been updated and ready to be used? That&#39;s where delegation comes in to place.</p>
+<p>Delegation is a design pattern in swift, that you can further read in the resources below,<br> In our case, we&#39;ll use the <code>Location Manager Delegate</code> in order to get updates related to the location. By conforming to the delegate we&#39;ll be able to do actions related to the updates we want to get.</p>
+<p>Resources: <a href="https://learnappmaking.com/delegation-swift-how-to/" target="_blank">Delegation in swift</a><a href="https://www.youtube.com/watch?v=DBWu6TnhLeY" target="_blank">Swift Delegate Protocol Pattern Tutorial - Sean Allen</a></p>
+<h3 is-upgraded>Using extensions for cleaner code</h3>
+<p>Our <code>WeatherVC</code> will have to conform to <code>CLLocationManagerDelegate</code> protocol. We can write an extension for our <code>WeatherVC</code>, using that approach will ease our code readability by knowing that the extension is responsible for location purposes only.</p>
+<p>After the the closing braces of <code>WeatherVC</code> add the following line of code:</p>
+<pre><code>extension WeatherVC: CLLocationManagerDelegate {
+
+}
+</code></pre>
+<p>Resources: <a href="https://www.google.com/search?client=safari&rls=en&q=CLLocationManagerDelegate&ie=UTF-8&oe=UTF-8" target="_blank">CLLocationManagerDelegate</a></p>
+<h2 is-upgraded>What do we need from Location Manager Delegate?</h2>
+<p>Let&#39;s ask ourselves what do we need to know?</p>
+<ul>
+<li>We basically need to update our <code>CurrentLocation</code> with you guessed, the Current Location.</li>
+<li>We also need to handle errors such as:  <ul>
+<li>What happens if we asked for the users location but didn&#39;t get its permission?</li>
+<li>What happens if we do have permission to access the location but its location services are disabled?</li>
+<li>What happens if for some reason the location services are enabled, but there&#39;s no location?</li>
+</ul>
+</li>
+</ul>
+<h3 is-upgraded>Handling Authorization</h3>
+<p>CLocationManagerDelegate has a function named <code>func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)</code>. Go ahead and add the following lines of code to our extension:</p>
+<pre><code>func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+  if status == .authorizedWhenInUse {
+      locationManager.startUpdatingLocation()
+    } else {
+      locationManager.requestWhenInUseAuthorization()
+    }
+}
+</code></pre>
+<p>Reading the functions makes lots of sense, but how does it work? By conforming to the delegate, we get an update if the authorization has changed. Now comes the <code>WeatherVC</code> part where by filling the function body we do what we want if this update. We want to start updating the location if the user is authorized. in Any other case we want to nudge the user and ask for its permission so we can continue working.</p>
+<p>What happens if We do get authorization, but location services are disabled? iOS already handled the work for us, no worries.</p>
+<h3 is-upgraded>Updating the location upon authorization</h3>
+<p>In order to update our <code>Location</code> model with the location we need to use the delegates function related to updatingLocation. This is where <code>func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])</code> comes to help.</p>
+<p>Go ahead and add the following lines of code to our extension:</p>
+<pre><code>func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let currentLocation: CLLocationCoordinate2D = locationManager.location?.coordinate else {
+        return }
+    Location.shared.latitude = currentLocation.latitude
+    Location.shared.longitude = currentLocation.longitude
+    fetchData()
+}
+</code></pre>
+<p>Negative: <code>fetchData()</code> is a function in our View Controller we&#39;ll handle later. no worries.</p>
+<h3 is-upgraded>Dealing with Errors</h3>
+<p>Checking our errors handling in the beginning, we already took care of:</p>
+<ul>
+<li>No authorization, in that case we ask again for the user&#39;s permission.</li>
+<li>Authorized but Location Services are disabled, iOS is taking care of that.</li>
+</ul>
+<p>We just need to take care of a case I was able to simulate in the simulator. What happens if Location When-In-Use is authorized, Location services are enabled, but location is none.</p>
+<p>Go ahead and add the following lines of code to our extension:</p>
+<pre><code>func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    self.showAlertOnMain(title: &#34;Check your location&#34;, message: &#34;Your location seems to be none&#34;)
+}
+</code></pre>
+<p>Negative: `<code>showAlertOnMain</code> is an extension we&#39;ll later add for our ViewController in order to handle alerts`</p>
 
 
       </google-codelab-step>

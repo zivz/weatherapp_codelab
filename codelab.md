@@ -741,4 +741,125 @@ By using the `utilities`/`inspectors` pane, we can use the connections inspector
 * Click on the right most button, which the connections inspector.
 * You should see all our connections, I've marked those you should be familiar with in the rectangular area.
 ![ConnectionsInspector](./assets/ConnectionsInspector.png)
-* verify the all your connections appears with a filled circle.  
+* verify that all your connections appears with a filled circle.  
+
+## Location Manager
+
+#### Location Permission
+In order to fetch the user's location we'll first need the user's permission.
+
+from [medium.com](https://medium.com/rakutenready/requesting-location-permissions-in-ios-9e5a3b814a8b)
+iOS apps can support one of two levels of location access:
+* While using the app
+  The app can access the device’s location when the app is in use. This is also known as “when-in-use authorization.”
+* Always
+  The app can access the device’s location either when app is in use or in the background.
+
+Since we don't need to Always use the user's location, we'll request the user to allow location `While using the app`.
+`While using the app`, is also referred in Apple's Terminology as `when-in-use`.
+
+#### Telling the user we need its permission
+In order to tell the user we need its permission to access the location `when-in-use`, we need to display the user an alert.
+As seen in the image below, the only thing we need to take care about is the `Message` body.
+![LocationRequestAlert](./assets/LocationRequestAlert.png)
+The Title and Buttons are already taken care of.
+
+Now, just another question is left an-unanswered. How do we edit the usage description?
+* Open `info.plist`
+* Add a new key named `Privacy - Location When In Use Usage Description`
+* Add a value that will represent the message we want to show the user.
+  * We need your location to give you relevant, up-to-date weather information.
+
+#### Location Manager Delegate
+Now, that we have the user's permission, how can we tell our `WeatherVC` that our location was authorized?
+How can we tell our ViewController that our location has been updated and ready to be used?
+That's where delegation comes in to place.
+
+Delegation is a design pattern in swift, that you can further read in the resources below,  
+In our case, we'll use the `Location Manager Delegate` in order to get updates related to the location.
+By conforming to the delegate we'll be able to do actions related to the updates we want to get.
+
+Resources:
+[Delegation in swift](https://learnappmaking.com/delegation-swift-how-to/)
+[Swift Delegate Protocol Pattern Tutorial - Sean Allen](https://www.youtube.com/watch?v=DBWu6TnhLeY)
+
+#### Using extensions for cleaner code
+Our `WeatherVC` will have to conform to `CLLocationManagerDelegate` protocol.
+We can write an extension for our `WeatherVC`, using that approach will ease our code readability by knowing that the extension is responsible for location purposes only.
+
+After the the closing braces of `WeatherVC` add the following line of code:
+```Swift
+extension WeatherVC: CLLocationManagerDelegate {
+
+}
+```
+
+Resources:
+[CLLocationManagerDelegate](https://www.google.com/search?client=safari&rls=en&q=CLLocationManagerDelegate&ie=UTF-8&oe=UTF-8)
+
+
+### What do we need from Location Manager Delegate?
+Let's ask ourselves what do we need to know?
+* We basically need to update our `CurrentLocation` with you guessed, the Current Location.
+* We also need to handle errors such as:
+  * What happens if we asked for the users location but didn't get its permission?
+  * What happens if we do have permission to access the location but its location services are disabled?
+  * What happens if for some reason the location services are enabled, but there's no location?
+
+#### Handling Authorization
+CLocationManagerDelegate has a function named `func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)`.
+Go ahead and add the following lines of code to our extension:
+```Swift
+func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+  if status == .authorizedWhenInUse {
+      locationManager.startUpdatingLocation()
+    } else {
+      locationManager.requestWhenInUseAuthorization()
+    }
+}
+```
+
+Reading the functions makes lots of sense, but how does it work?
+By conforming to the delegate, we get an update if the authorization has changed.
+Now comes the `WeatherVC` part where by filling the function body we do what we want if this update.
+We want to start updating the location if the user is authorized.
+in Any other case we want to nudge the user and ask for its permission so we can continue working.
+
+What happens if We do get authorization, but location services are disabled?
+iOS already handled the work for us, no worries.
+
+#### Updating the location upon authorization
+In order to update our `Location` model with the location we need to use the delegates function related to updatingLocation.
+This is where `func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])` comes to help.
+
+Go ahead and add the following lines of code to our extension:
+```Swift
+func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let currentLocation: CLLocationCoordinate2D = locationManager.location?.coordinate else {
+        return }
+    Location.shared.latitude = currentLocation.latitude
+    Location.shared.longitude = currentLocation.longitude
+    fetchData()
+}
+```
+
+Negative:
+`fetchData()` is a function in our View Controller we'll handle later. no worries.
+
+#### Dealing with Errors
+Checking our errors handling in the beginning, we already took care of:
+* No authorization, in that case we ask again for the user's permission.
+* Authorized but Location Services are disabled, iOS is taking care of that.
+
+We just need to take care of a case I was able to simulate in the simulator.
+What happens if Location When-In-Use is authorized, Location services are enabled, but location is none.
+
+Go ahead and add the following lines of code to our extension:
+```Swift
+func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    self.showAlertOnMain(title: "Check your location", message: "Your location seems to be none")
+}
+```
+
+Negative:
+``showAlertOnMain` is an extension we'll later add for our ViewController in order to handle alerts`
