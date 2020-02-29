@@ -791,11 +791,11 @@ struct Weather: Decodable {
 <p>Follow these steps in order to fully conform to <code>CLLocationManagerDelegate</code>:</p>
 <ul>
 <li>After <code>import UIKit</code>, add <code>import CoreLocation</code></li>
-<li>After declaring all our outlets, add this line of code: <code>Swift<br>let locationManager = CLLocationManager()</code><br> * in <code>viewDidLoad()</code>, and after <code>super.viewDidLoad()</code> add these lines of code: <code>Swift<br>locationManager.delegate = self<br>locationManager.desiredAccuracy = kCLLocationAccuracyBest<br>locationManager.requestWhenInUseAuthorization()<br></code></li>
+<li>After declaring all our outlets, add this line of code: <code>Swift<br>let locationManager = CLLocationManager()</code><br> * In <code>viewDidLoad()</code>, and after <code>super.viewDidLoad()</code> add these lines of code: <code>Swift<br>locationManager.delegate = self<br>locationManager.desiredAccuracy = kCLLocationAccuracyBest<br>locationManager.requestWhenInUseAuthorization()<br></code></li>
 </ul>
 <p>What did we do above?</p>
 <ul>
-<li><code>locationManager</code> is an instance for <code>CLLocationManager()</code></li>
+<li><code>locationManager</code> is an instance of <code>CLLocationManager()</code></li>
 <li>We told <code>locationManager</code> that <code>WeatherVC</code> is its delegate and waiting for orders.</li>
 <li>We told <code>locationManager</code> that accuracy of location we want to have.</li>
 <li>We told <code>locationManager</code> to request for the location permission after the view has loaded. This is the first thing the user will see when launching the app.</li>
@@ -855,8 +855,8 @@ struct Weather: Decodable {
 <p>Let&#39;s explain the code above:</p>
 <ul>
 <li>Our date label will use the currentDate we wrote as an extension to <code>Date</code></li>
-<li>All other labels are pretty much declarative, notice that currentTempLabel is using a <code>concatenation</code> of the <code>Â</code>° symbol.</li>
-<li>in <code>currentWeatherImage.image</code> we we&#39;ll use an image from our <code>Assets.xcassets</code> The image will be based on the weatherType we get from our network call.</li>
+<li>All other labels are pretty much declarative, notice that <code>currentTempLabel</code> is using a <code>concatenation</code> of the <code>Degree</code> symbol.</li>
+<li>In <code>currentWeatherImage.image</code> we we&#39;ll use an image from our <code>Assets.xcassets</code> The image will be based on the weatherType we get from our network call.</li>
 </ul>
 <h3 is-upgraded>Writing an extension for alerts</h3>
 <p>We already came across some cases where we had present the user alerts. The first alert we were showing was related to location permission, but that was handled by adding a key-value pair in our <code>info.plist</code> The two other alerts we were showing, were in the case were no location is available and were there was a failure with our Network call.</p>
@@ -888,7 +888,7 @@ struct Weather: Decodable {
 <li>Our alert style defaults to .alert</li>
 <li>We create an instance of alertController with the provided info above.</li>
 <li>Then we add an action, with a button name &#34;Ok&#34;.</li>
-<li>Since no handler is needed open pressing the button, we leave the handler as <code>nil</code>.</li>
+<li>Since no handler is needed upon pressing the button, we leave the handler as <code>nil</code>.</li>
 <li>Then we use the Main Queue for UI Updates and present the alert.</li>
 </ul>
 

@@ -868,10 +868,10 @@ Remember, the delegate knows the information, and we do the rest of the work for
 Follow these steps in order to fully conform to `CLLocationManagerDelegate`:
 * After `import UIKit`, add `import CoreLocation`
 * After declaring all our outlets, add this line of code:
-```Swift
-let locationManager = CLLocationManager()
-```
-* in `viewDidLoad()`, and after `super.viewDidLoad()` add these lines of code:
+  ```Swift
+  let locationManager = CLLocationManager()
+  ```
+* In `viewDidLoad()`, and after `super.viewDidLoad()` add these lines of code:
 ```Swift
 locationManager.delegate = self
 locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -879,7 +879,7 @@ locationManager.requestWhenInUseAuthorization()
 ```
 
 What did we do above?
-* `locationManager` is an instance for `CLLocationManager()`
+* `locationManager` is an instance of `CLLocationManager()`
 * We told `locationManager` that `WeatherVC` is its delegate and waiting for orders.
 * We told `locationManager` that accuracy of location we want to have.
 * We told `locationManager` to request for the location permission after the view has loaded.
@@ -946,8 +946,8 @@ func updateMainUI() {
 
 Let's explain the code above:
 * Our date label will use the currentDate we wrote as an extension to `Date`
-* All other labels are pretty much declarative, notice that currentTempLabel is using a `concatenation` of the `°` symbol.
-* in `currentWeatherImage.image` we we'll use an image from our `Assets.xcassets`
+* All other labels are pretty much declarative, notice that `currentTempLabel` is using a `concatenation` of the `Degree` symbol.
+* In `currentWeatherImage.image` we we'll use an image from our `Assets.xcassets`
   The image will be based on the weatherType we get from our network call.
 
 #### Writing an extension for alerts
@@ -985,7 +985,7 @@ Let's explain what we just wrote.
 * Our alert style defaults to .alert
 * We create an instance of alertController with the provided info above.
 * Then we add an action, with a button name "Ok".
-* Since no handler is needed open pressing the button, we leave the handler as `nil`.
+* Since no handler is needed upon pressing the button, we leave the handler as `nil`.
 * Then we use the Main Queue for UI Updates and present the alert.
 
 ## Are we there yet?
