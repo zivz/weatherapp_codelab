@@ -756,8 +756,8 @@ struct Weather: Decodable {
     }
 }
 </code></pre>
-<p>Reading the functions makes lots of sense, but how does it work? By conforming to the delegate, we get an update if the authorization has changed. Now comes the <code>WeatherVC</code> part where by filling the function body we do what we want if this update. We want to start updating the location if the user is authorized. in Any other case we want to nudge the user and ask for its permission so we can continue working.</p>
-<p>What happens if We do get authorization, but location services are disabled? iOS already handled the work for us, no worries.</p>
+<p>Reading the function above makes lots of sense, but how does it work? By conforming to the location manager delegate and using the function above, we get an update if the authorization has changed. Now comes the <code>WeatherVC</code> part where by filling the function body we do what we want if this update occurs. We want to start updating the location if the user&#39;s location is authorized. In Any other case we want to nudge the user and ask for its permission so we can continue working.</p>
+<p>Negative: What happens if We do get authorization, but location services are disabled? iOS already handled the work for us, no worries.</p>
 <h3 is-upgraded>Updating the location upon authorization</h3>
 <p>In order to update our <code>Location</code> model with the location we need to use the delegates function related to updatingLocation. This is where <code>func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])</code> comes to help.</p>
 <p>Go ahead and add the following lines of code to our extension:</p>
@@ -769,7 +769,7 @@ struct Weather: Decodable {
     fetchData()
 }
 </code></pre>
-<p>Negative: <code>fetchData()</code> is a function in our View Controller we&#39;ll handle later. no worries.</p>
+<p>Negative: <code>fetchData()</code> is a function in our WeatherVC we&#39;ll handle later. no worries.</p>
 <h3 is-upgraded>Dealing with Errors</h3>
 <p>Checking our errors handling in the beginning, we already took care of:</p>
 <ul>
@@ -782,7 +782,21 @@ struct Weather: Decodable {
     self.showAlertOnMain(title: &#34;Check your location&#34;, message: &#34;Your location seems to be none&#34;)
 }
 </code></pre>
-<p>Negative: `<code>showAlertOnMain</code> is an extension we&#39;ll later add for our ViewController in order to handle alerts`</p>
+<p>Negative: <code>showAlertOnMain</code> is an extension we&#39;ll later add for our ViewController in order to handle alerts</p>
+<h3 is-upgraded>Adding the missing parts in WeatherVC</h3>
+<p>We just miss some parts so we can tell the CLLocationManagerDelegate that we&#39;ll do the work for me. Remember, the delegate knows the information, and we do the rest of the work for him.</p>
+<p>Follow these steps in order to fully conform to <code>CLLocationManagerDelegate</code>:</p>
+<ul>
+<li>After <code>import UIKit</code>, add <code>import CoreLocation</code></li>
+<li>After declaring all our outlets, add this line of code: <code>Swift<br>let locationManager = CLLocationManager()</code><br> * in <code>viewDidLoad()</code>, and after <code>super.viewDidLoad()</code> add these lines of code: <code>Swift<br>locationManager.delegate = self<br>locationManager.desiredAccuracy = kCLLocationAccuracyBest<br>locationManager.requestWhenInUseAuthorization()<br></code></li>
+</ul>
+<p>What did we do above?</p>
+<ul>
+<li><code>locationManager</code> is an instance for <code>CLLocationManager()</code></li>
+<li>We told <code>locationManager</code> that <code>WeatherVC</code> is its delegate and waiting for orders.</li>
+<li>We told <code>locationManager</code> that accuracy of location we want to have.</li>
+<li>We told <code>locationManager</code> to request for the location permission after the view has loaded. This is the first thing the user will see when launching the app.</li>
+</ul>
 
 
       </google-codelab-step>

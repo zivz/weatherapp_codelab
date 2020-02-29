@@ -819,12 +819,13 @@ func locationManager(_ manager: CLLocationManager, didChangeAuthorization status
 }
 ```
 
-Reading the functions makes lots of sense, but how does it work?
-By conforming to the delegate, we get an update if the authorization has changed.
-Now comes the `WeatherVC` part where by filling the function body we do what we want if this update.
-We want to start updating the location if the user is authorized.
-in Any other case we want to nudge the user and ask for its permission so we can continue working.
+Reading the function above makes lots of sense, but how does it work?
+By conforming to the location manager delegate and using the function above, we get an update if the authorization has changed.
+Now comes the `WeatherVC` part where by filling the function body we do what we want if this update occurs.
+We want to start updating the location if the user's location is authorized.
+In Any other case we want to nudge the user and ask for its permission so we can continue working.
 
+Negative:
 What happens if We do get authorization, but location services are disabled?
 iOS already handled the work for us, no worries.
 
@@ -844,7 +845,7 @@ func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:
 ```
 
 Negative:
-`fetchData()` is a function in our View Controller we'll handle later. no worries.
+`fetchData()` is a function in our WeatherVC we'll handle later. no worries.
 
 #### Dealing with Errors
 Checking our errors handling in the beginning, we already took care of:
@@ -862,4 +863,28 @@ func locationManager(_ manager: CLLocationManager, didFailWithError error: Error
 ```
 
 Negative:
-``showAlertOnMain` is an extension we'll later add for our ViewController in order to handle alerts`
+`showAlertOnMain` is an extension we'll later add for our ViewController in order to handle alerts
+
+#### Adding the missing parts in WeatherVC
+We just miss some parts so we can tell the CLLocationManagerDelegate that we'll do the work for me.
+Remember, the delegate knows the information, and we do the rest of the work for him.
+
+Follow these steps in order to fully conform to `CLLocationManagerDelegate`:
+* After `import UIKit`, add `import CoreLocation`
+* After declaring all our outlets, add this line of code:
+```Swift
+let locationManager = CLLocationManager()
+```
+* in `viewDidLoad()`, and after `super.viewDidLoad()` add these lines of code:
+```Swift
+locationManager.delegate = self
+locationManager.desiredAccuracy = kCLLocationAccuracyBest
+locationManager.requestWhenInUseAuthorization()
+```
+
+What did we do above?
+* `locationManager` is an instance for `CLLocationManager()`
+* We told `locationManager` that `WeatherVC` is its delegate and waiting for orders.
+* We told `locationManager` that accuracy of location we want to have.
+* We told `locationManager` to request for the location permission after the view has loaded.
+  This is the first thing the user will see when launching the app.
