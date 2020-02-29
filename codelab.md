@@ -680,11 +680,11 @@ func currentDate() -> String {
 In order to control our UI elements and handle the logic related to them, we need to connect our UI to a View Controller.
 Currently our `Main.storyboard` has a scene, named `View Controller Scene`, and by viewing its Identity Inspector we see its class is `ViewController.swift`.
 
-Positive:
-**Reminder:** Having Main.storyboard and a ViewController associated to it, came out of the box, since we created a `Single View` Template while we created the project.
+Positive
+: **Reminder:** Having Main.storyboard and a ViewController associated to it, came out of the box, since we created a `Single View` Template while we created the project.
 
 Negative:
-`ViewController.swift` class has no code related to our logic, and even before we start writing any code in it, its name doesn't reflect its responsibility.  So before we start connecting our UI Elements to the ViewController we'll first rename it.
+: `ViewController.swift` class has no code related to our logic, and even before we start writing any code in it, its name doesn't reflect its responsibility.  So before we start connecting our UI Elements to the ViewController we'll first rename it.
 
 #### Renaming our View controller
 In order to rename our view controller follows these steps:
@@ -824,8 +824,8 @@ Now comes the `WeatherVC` part where by filling the function body we do what we 
 We want to start updating the location if the user's location is authorized.
 In Any other case we want to nudge the user and ask for its permission so we can continue working.
 
-Negative:
-What happens if We do get authorization, but location services are disabled?
+Negative
+: What happens if We do get authorization, but location services are disabled?
 iOS already handled the work for us, no worries.
 
 #### Updating the location upon authorization
@@ -843,8 +843,8 @@ func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:
 }
 ```
 
-Negative:
-`fetchData()` is a function in our WeatherVC we'll handle later. no worries.
+Negative
+: `fetchData()` is a function in our WeatherVC we'll handle later. no worries.
 
 #### Dealing with Errors
 Checking our errors handling in the beginning, we already took care of:
@@ -861,8 +861,8 @@ func locationManager(_ manager: CLLocationManager, didFailWithError error: Error
 }
 ```
 
-Negative:
-`showAlertOnMain` is an extension we'll later add for our ViewController in order to handle alerts
+Negative
+: `showAlertOnMain` is an extension we'll later add for our ViewController in order to handle alerts
 
 #### Adding the missing parts in WeatherVC
 We just miss some parts so we can tell the CLLocationManagerDelegate that we'll do the work for me.
