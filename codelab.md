@@ -81,7 +81,7 @@ Once the project is created, The project file will appear on the screen.
 
 ![Project Settings](./assets/Project_Settings.png)
 
-## Weather App - UI Overview
+## Weather App UI Overview
 
 #### UI Components
 Our Primary View will contain 2 subviews.  
@@ -187,7 +187,7 @@ Follow these steps in order to add the items:
 
 ## Creating Current Weather - General Info Stackview
 
-As specified in [Weather App - UI Overview](#weather-app---ui-overview), the `Current Weather` UI view will be consisted of two views.  
+As specified in [Weather App - UI Overview](#weather-app-ui-overview), the `Current Weather` UI view will be consisted of two views.  
 Those views are marked in the image below in <font color="red">red</font>, and <font color="green">green</font>.
 The red view refers to the `General Info View`, while the green view refers to the `Weather Description View`.
 
@@ -229,9 +229,10 @@ Follow these steps in order to add the items:
 ## Creating Current Weather - Description Stackview
 
 #### Current Weather Description Stackview properties
-* Axis - As our elements are stacked vertically, we'll choose `Vertical`.
-* Alignment - We'd like our elements to be in the Center of the container, we'll choose `Center`.
-* Distribution - We'd like our elements to be vertically stretched in the container, hence, we'll choose `Fill`.
+* **Axis** - As our elements are stacked vertically, we'll choose `Vertical`.
+* **Alignment** - We'd like our elements to be in the Center of the container, we'll choose `Center`.
+* **Distribution** - We'd like our elements to be vertically stretched in the container, hence, we'll choose `Fill`.
+* **Spacing** - Is redundant here since **Distribution** defines the way the items will be spaced.
 
 ![Image Stack View](./assets/Image_Stack_View_Attributes.png)
 
