@@ -713,12 +713,12 @@ struct Weather: Decodable {
 </ul>
 <p>Since we don&#39;t need to Always use the user&#39;s location, we&#39;ll request the user to allow location <code>While using the app</code>. <code>While using the app</code>, is also referred in Apple&#39;s Terminology as <code>when-in-use</code>.</p>
 <h3 is-upgraded>Telling the user we need its permission</h3>
-<p>In order to tell the user we need its permission to access the location <code>when-in-use</code>, we need to display the user an alert. As seen in the image below, the only thing we need to take care about is the <code>Message</code> body. <img alt="LocationRequestAlert" src="img/43164e5db61fb40d.png"><br> The Title and Buttons are already taken care of by iOS.</p>
+<p>In order to tell the user we need its permission to access the location <code>when-in-use</code>, we need to display the user an alert. As seen in the image below, the only thing we need to take care of is the <code>Message</code> body. <img alt="LocationRequestAlert" src="img/43164e5db61fb40d.png"><br> The Title and Buttons are already taken care of by iOS.</p>
 <p>Now, just another question is left an-unanswered. How do we edit the usage description?</p>
 <ul>
 <li>Open <code>info.plist</code></li>
 <li>Add a new key named <code>Privacy - Location When In Use Usage Description</code></li>
-<li>Add a value that will represent the message we want to show the user.<br> &gt; We need your location to give you relevant, up-to-date weather information.</li>
+<li>Add a value that will represent the message we want to show the user.<br> &#34;We need your location to give you relevant, up-to-date weather information.&#34;</li>
 </ul>
 <h3 is-upgraded>Location Manager Delegate</h3>
 <p>Now, that we have the user&#39;s permission, how can we tell our <code>WeatherVC</code> that our location was authorized? How can we tell our ViewController that our location has been updated and ready to be used? That&#39;s where delegation comes in to place.</p>

@@ -760,7 +760,7 @@ Since we don't need to Always use the user's location, we'll request the user to
 
 #### Telling the user we need its permission
 In order to tell the user we need its permission to access the location `when-in-use`, we need to display the user an alert.
-As seen in the image below, the only thing we need to take care about is the `Message` body.
+As seen in the image below, the only thing we need to take care of is the `Message` body.
 ![LocationRequestAlert](./assets/LocationRequestAlert.png)  
 The Title and Buttons are already taken care of by iOS.
 
@@ -768,7 +768,7 @@ Now, just another question is left an-unanswered. How do we edit the usage descr
 * Open `info.plist`
 * Add a new key named `Privacy - Location When In Use Usage Description`
 * Add a value that will represent the message we want to show the user.  
-> We need your location to give you relevant, up-to-date weather information.
+"We need your location to give you relevant, up-to-date weather information."
 
 #### Location Manager Delegate
 Now, that we have the user's permission, how can we tell our `WeatherVC` that our location was authorized?
