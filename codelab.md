@@ -293,7 +293,7 @@ A group without folder is used in order to organize files in your project withou
 You can read more about groups and folder in [stackoverflow.com](https://stackoverflow.com/questions/34207664/difference-between-folder-and-group-in-xcode)
 
 Follow these steps in order to create our Network Manager file:
-1. Right click our new group, named `Network Manager` c
+1. Right click our new group, named `Network Manager`
 2. Choose New file..
 3. Choose `Swift`
 4. name it `NetworkManager.swift`
@@ -381,9 +381,8 @@ Our network call will not get any outside parameters, but rather be using our lo
 We'll use the enumeration to capture information about whether an asynchronous call succeeds or fails, and use the associated values for the `Result.success(_:)` and `Result.failure(_:)` cases to carry information about the result of the call.
 To read more about using result, I've found [this article](https://www.hackingwithswift.com/articles/161/how-to-use-result-in-swift) very helpful.
 
-Go ahead an declare our function under `private init() {}` declaration.
-```swift
-
+Go ahead and declare our function under `private init() {}` declaration.
+```Swift
 func getCurrentWeather(completionHandler: @escaping (Result<CurrentWeather, WeatherError>) -> Void ) {
 
 }
@@ -888,3 +887,136 @@ What did we do above?
 * We told `locationManager` that accuracy of location we want to have.
 * We told `locationManager` to request for the location permission after the view has loaded.
   This is the first thing the user will see when launching the app.
+
+
+## Using Location in Our Network Request
+Now that we have our latitude and longitude coordinates, we're finally ready to retrieve the weather in the given location.
+We can now add to `WeatherVC` our `fetchData` function.
+We use fetchData and not `getCurrentWeather` since our app is open for extensions, and we might want to do more than just getting the current weather upon location retrieval.
+
+Before getting the current weather, let's declare a variable that will hold our current weather information.
+Add this line of code, after declaring the `locationManager`.
+```Swift
+var currentWeather: CurrentWeather!
+```
+
+After `func viewDidLoad`, add:
+```Swift
+private func fetchData() {
+    getCurrentWeather()
+}
+```
+
+Now let's write the code for `getCurrentWeather`, add the following lines of code after `fetchData()`:
+```Swift
+private func getCurrentWeather() {
+    NetworkManager.shared.getCurrentWeather { [weak self] result in
+        guard let self = self else { return }
+
+        switch result {
+            case .success(let currentWeather):
+              self.currentWeather = currentWeather
+              DispatchQueue.main.async {
+                  self.updateMainUI()
+              }
+            case .failure(let error):
+              self.showAlertOnMain(title: "Something went wrong", message: error.rawValue)
+            }
+        }
+}
+```
+
+Let's explain we wrote above:
+* We first called our NetworkManager to get the current weather
+* We're guarding self as precaution of memory leaks
+* Upon getting the result, we're expecting `.success` or `.failure`
+  * In case of `success` we'll call a function that will update our currentWeather instance.
+    * We'll then do the UI Updates on the main threads, that's why we used `DispatchQueue.main.async`
+    * We'll call a function name updateMainUI(), that will update our UI using the currentWeather obj
+  * In case of `failure` we'll Show an Alert with a relevant error.
+
+We now have to add our `updateMainUI` function
+Add the following lines of code after `getCurrentWeather` function.
+```Swift
+func updateMainUI() {
+    dateLabel.text = Date().currentDate()
+    currentTempLabel.text = "\(currentWeather.currentTemp)°"
+    currentWeatherTypeLabel.text = currentWeather.weatherType
+    locationLabel.text = currentWeather.cityName
+    currentWeatherImage.image = UIImage(named: currentWeather.weatherType)
+}
+```
+
+Let's explain the code above:
+* Our date label will use the currentDate we wrote as an extension to `Date`
+* All other labels are pretty much declarative, notice that currentTempLabel is using a `concatenation` of the `°` symbol.
+* in `currentWeatherImage.image` we we'll use an image from our `Assets.xcassets`
+  The image will be based on the weatherType we get from our network call.
+
+#### Writing an extension for alerts
+We already came across some cases where we had present the user alerts.
+The first alert we were showing was related to location permission, but that was handled by adding a key-value pair in our `info.plist`
+The two other alerts we were showing, were in the case were no location is available and were there was a failure with our Network call.
+
+Instead of writing an alert every time we need one, we can write an extension to UIViewController, since our ViewController is UIViewController, we can use this extension by calling `self`.
+
+Follow these steps in order to add extension for UIViewController:
+1. Go to Project Navigator
+1. Right click  `Extensions`
+2. Choose New file..
+3. Choose `Swift`
+4. Name it `UIViewController+Ext.swift`
+
+Now, open `UIViewController+Ext`, instead of importing `Foundation`, import `UIKit` since we're going to deal with UI.
+
+Add the following lines of code.
+```Swift
+extension UIViewController {
+    func showAlertOnMain(title: String, message: String, style: UIAlertController.Style = .alert) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+}
+```
+
+Let's explain what we just wrote.
+* Our function expects a title and message for our alert
+* Our alert style defaults to .alert
+* We create an instance of alertController with the provided info above.
+* Then we add an action, with a button name "Ok".
+* Since no handler is needed open pressing the button, we leave the handler as `nil`.
+* Then we use the Main Queue for UI Updates and present the alert.
+
+## Are we there yet?
+We just need to think about edge cases and some tweaks.
+These tweaks are totally up to you, but you should consider them.
+
+* What happens with the UI Elements before we get any network response.
+  * Do we want to change our view's background according to the weather type?
+  * Do we want to show some placeholder text before we receive the data from the network?
+  * Do we want to hide the elements and show them when we get the response?
+  * Do we want to show an activity indicator when our network call begins?
+  * Do we want to have a placeholder image in case where unknown weather type is received in the response?
+
+#### Adding table views
+You can review the full code in [github.com](https://github.com/zivz/WeatherApp) in order to add the table view and the activity indicator code.
+
+For that you'll need to:
+* Add table view in our `WeatherVC` scene.
+* Add a custom class representing the forecast cell.
+* Add a network call to get the forecast
+* Conform to UITableViewDataSource in order to feed the table with data.
+* Set `WeatherVC` as the Tableview data source.
+
+Good Luck!
+
+#### Adding more features
+In order to complete the app, you can add a table view representing the forecast for the next 10 days.
+You can also add more screens that will display the user weather in different locations.
+You can persist the data,
+You can add a settings button that will change the units to Fahrenheit.
+You can also  

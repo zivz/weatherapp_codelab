@@ -307,7 +307,7 @@
 <p>You can read more about groups and folder in <a href="https://stackoverflow.com/questions/34207664/difference-between-folder-and-group-in-xcode" target="_blank">stackoverflow.com</a></p>
 <p>Follow these steps in order to create our Network Manager file:</p>
 <ol type="1">
-<li>Right click our new group, named <code>Network Manager</code> c</li>
+<li>Right click our new group, named <code>Network Manager</code></li>
 <li>Choose New file..</li>
 <li>Choose <code>Swift</code></li>
 <li>name it <code>NetworkManager.swift</code></li>
@@ -381,7 +381,7 @@
 <p>By using private init() our NetworkManager cannot be instantiated more than once, hence, it&#39;s a singleton.</p>
 <h3 is-upgraded>Creating our currentWeather Network Call</h3>
 <p>Our network call will not get any outside parameters, but rather be using our location coordinates, which will be accessed through a singleton as well. We&#39;ll use the enumeration to capture information about whether an asynchronous call succeeds or fails, and use the associated values for the <code>Result.success(_:)</code> and <code>Result.failure(_:)</code> cases to carry information about the result of the call. To read more about using result, I&#39;ve found <a href="https://www.hackingwithswift.com/articles/161/how-to-use-result-in-swift" target="_blank">this article</a> very helpful.</p>
-<p>Go ahead an declare our function under <code>private init() {}</code> declaration.</p>
+<p>Go ahead and declare our function under <code>private init() {}</code> declaration.</p>
 <pre><code>func getCurrentWeather(completionHandler: @escaping (Result&lt;CurrentWeather, WeatherError&gt;) -&gt; Void ) {
 
 }
@@ -794,6 +794,126 @@ struct Weather: Decodable {
 <li>We told <code>locationManager</code> that accuracy of location we want to have.</li>
 <li>We told <code>locationManager</code> to request for the location permission after the view has loaded. This is the first thing the user will see when launching the app.</li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using Location in Our Network Request" duration="0">
+        <p>Now that we have our latitude and longitude coordinates, we&#39;re finally ready to retrieve the weather in the given location. We can now add to <code>WeatherVC</code> our <code>fetchData</code> function. We use fetchData and not <code>getCurrentWeather</code> since our app is open for extensions, and we might want to do more than just getting the current weather upon location retrieval.</p>
+<p>Before getting the current weather, let&#39;s declare a variable that will hold our current weather information. Add this line of code, after declaring the <code>locationManager</code>.</p>
+<pre><code>var currentWeather: CurrentWeather!
+</code></pre>
+<p>After <code>func viewDidLoad</code>, add:</p>
+<pre><code>private func fetchData() {
+    getCurrentWeather()
+}
+</code></pre>
+<p>Now let&#39;s write the code for <code>getCurrentWeather</code>, add the following lines of code after <code>fetchData()</code>:</p>
+<pre><code>private func getCurrentWeather() {
+    NetworkManager.shared.getCurrentWeather { [weak self] result in
+        guard let self = self else { return }
+
+        switch result {
+            case .success(let currentWeather):
+              self.currentWeather = currentWeather
+              DispatchQueue.main.async {
+                  self.updateMainUI()
+              }
+            case .failure(let error):
+              self.showAlertOnMain(title: &#34;Something went wrong&#34;, message: error.rawValue)
+            }
+        }
+}
+</code></pre>
+<p>Let&#39;s explain we wrote above:</p>
+<ul>
+<li>We first called our NetworkManager to get the current weather</li>
+<li>We&#39;re guarding self as precaution of memory leaks</li>
+<li>Upon getting the result, we&#39;re expecting <code>.success</code> or <code>.failure</code><ul>
+<li>In case of <code>success</code> we&#39;ll call a function that will update our currentWeather instance.</li>
+<li>We&#39;ll then do the UI Updates on the main threads, that&#39;s why we used <code>DispatchQueue.main.async</code></li>
+<li>We&#39;ll call a function name updateMainUI(), that will update our UI using the currentWeather obj</li>
+<li>In case of <code>failure</code> we&#39;ll Show an Alert with a relevant error.</li>
+</ul>
+</li>
+</ul>
+<p>We now have to add our <code>updateMainUI</code> function Add the following lines of code after <code>getCurrentWeather</code> function.</p>
+<pre><code>func updateMainUI() {
+    dateLabel.text = Date().currentDate()
+    currentTempLabel.text = &#34;\(currentWeather.currentTemp)Â°&#34;
+    currentWeatherTypeLabel.text = currentWeather.weatherType
+    locationLabel.text = currentWeather.cityName
+    currentWeatherImage.image = UIImage(named: currentWeather.weatherType)
+}
+</code></pre>
+<p>Let&#39;s explain the code above:</p>
+<ul>
+<li>Our date label will use the currentDate we wrote as an extension to <code>Date</code></li>
+<li>All other labels are pretty much declarative, notice that currentTempLabel is using a <code>concatenation</code> of the <code>Â</code>° symbol.</li>
+<li>in <code>currentWeatherImage.image</code> we we&#39;ll use an image from our <code>Assets.xcassets</code> The image will be based on the weatherType we get from our network call.</li>
+</ul>
+<h3 is-upgraded>Writing an extension for alerts</h3>
+<p>We already came across some cases where we had present the user alerts. The first alert we were showing was related to location permission, but that was handled by adding a key-value pair in our <code>info.plist</code> The two other alerts we were showing, were in the case were no location is available and were there was a failure with our Network call.</p>
+<p>Instead of writing an alert every time we need one, we can write an extension to UIViewController, since our ViewController is UIViewController, we can use this extension by calling <code>self</code>.</p>
+<p>Follow these steps in order to add extension for UIViewController:</p>
+<ol type="1">
+<li>Go to Project Navigator</li>
+<li>Right click  <code>Extensions</code></li>
+<li>Choose New file..</li>
+<li>Choose <code>Swift</code></li>
+<li>Name it <code>UIViewController+Ext.swift</code></li>
+</ol>
+<p>Now, open <code>UIViewController+Ext</code>, instead of importing <code>Foundation</code>, import <code>UIKit</code> since we&#39;re going to deal with UI.</p>
+<p>Add the following lines of code.</p>
+<pre><code>extension UIViewController {
+    func showAlertOnMain(title: String, message: String, style: UIAlertController.Style = .alert) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        alertController.addAction(UIAlertAction(title: &#34;Ok&#34;, style: .default, handler: nil))
+
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+}
+</code></pre>
+<p>Let&#39;s explain what we just wrote.</p>
+<ul>
+<li>Our function expects a title and message for our alert</li>
+<li>Our alert style defaults to .alert</li>
+<li>We create an instance of alertController with the provided info above.</li>
+<li>Then we add an action, with a button name &#34;Ok&#34;.</li>
+<li>Since no handler is needed open pressing the button, we leave the handler as <code>nil</code>.</li>
+<li>Then we use the Main Queue for UI Updates and present the alert.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Are we there yet?" duration="0">
+        <p>We just need to think about edge cases and some tweaks. These tweaks are totally up to you, but you should consider them.</p>
+<ul>
+<li>What happens with the UI Elements before we get any network response.  <ul>
+<li>Do we want to change our view&#39;s background according to the weather type?</li>
+<li>Do we want to show some placeholder text before we receive the data from the network?</li>
+<li>Do we want to hide the elements and show them when we get the response?</li>
+<li>Do we want to show an activity indicator when our network call begins?</li>
+<li>Do we want to have a placeholder image in case where unknown weather type is received in the response?</li>
+</ul>
+</li>
+</ul>
+<h3 is-upgraded>Adding table views</h3>
+<p>You can review the full code in <a href="https://github.com/zivz/WeatherApp" target="_blank">github.com</a> in order to add the table view and the activity indicator code.</p>
+<p>For that you&#39;ll need to:</p>
+<ul>
+<li>Add table view in our <code>WeatherVC</code> scene.</li>
+<li>Add a custom class representing the forecast cell.</li>
+<li>Add a network call to get the forecast</li>
+<li>Conform to UITableViewDataSource in order to feed the table with data.</li>
+<li>Set <code>WeatherVC</code> as the Tableview data source.</li>
+</ul>
+<p>Good Luck!</p>
+<h3 is-upgraded>Adding more features</h3>
+<p>In order to complete the app, you can add a table view representing the forecast for the next 10 days. You can also add more screens that will display the user weather in different locations. You can persist the data, You can add a settings button that will change the units to Fahrenheit. You can also</p>
 
 
       </google-codelab-step>
