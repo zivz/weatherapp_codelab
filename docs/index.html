@@ -29,29 +29,29 @@
     
       <google-codelab-step label="First iOS App Overview" duration="2">
         <p>In the following tutorial, we&#39;ll learn how to make an iOS app.</p>
-<p><strong>General<br></strong> The app will show the user the current weather in its current location.</p>
+<p><strong>General<br></strong> The app will show the user the current weather in his current location.</p>
 <p><strong>UI<br></strong> The UI Will have a single view.<br> The primary view will contain two subviews:</p>
 <ul>
 <li>A view for the current weather</li>
-<li>A table view for the next 10 days forecast.</li>
+<li>A table view for the next 10 day forecast.</li>
 </ul>
 <p class="image-container"><img alt="WeatherApp" src="img/1b7f00461e18d109.png"></p>
 <p><strong>API<br></strong> The app will interact with Open Weather API, in order to fetch the current weather, and the forecast.</p>
-<p><strong>Location<br></strong> The app will fetch the user&#39;s location, upon <code>When in use authorization</code> permission</p>
+<p><strong>Location<br></strong> The app will fetch the user&#39;s location, upon <code>When-in-use</code> authorization permission.</p>
 <p><strong>Notes:</strong></p>
 <ul>
-<li>The tutorial will focus on Storyboards, Autolayout and UIStackView.<br></li>
+<li>The tutorial will focus on <code>Storyboards</code>, <code>Autolayout</code> and <code>UIStackView</code>.<br></li>
 <li>The tutorial <strong>will include the current weather view only</strong>.<br></li>
 <li>Location Handler, Networking, Parsing code will be provided in order to provide the full capabilities of the app.<br></li>
-<li>The app is extendable for further implementation of the next 10 days forecast.<br></li>
-<li>Tableview displaying the forecast for the next 10 days implementation is still available in github.<br></li>
-<li>The full code is available <a href="https://github.com/zivz/WeatherApp" target="_blank">here</a>.<br></li>
+<li>The app is extendable for further implementation of the next 10 day forecast.<br></li>
+<li>Tableview displaying the forecast for the next 10 day implementation is still available in <a href="https://github.com/zivz/WeatherApp" target="_blank">Github</a>.<br></li>
 </ul>
 <p><strong>Resources:</strong></p>
 <ul>
 <li><a href="https://developer.apple.com/design/human-interface-guidelines/ios/overview/" target="_blank">Human Interface Guidelines</a></li>
 <li><a href="https://www.youtube.com/watch?v=emojd8GFB0o" target="_blank">Autolayout</a> and <a href="https://www.youtube.com/watch?v=eF9Ut-VpdAI" target="_blank">StackView</a></li>
 <li><a href="https://openweathermap.org/api" target="_blank">Open Weather API</a>.</li>
+<li>The full code is available <a href="https://github.com/zivz/WeatherApp" target="_blank">here</a>.</li>
 </ul>
 
 
@@ -91,16 +91,16 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Weather UI Overview" duration="0">
+      <google-codelab-step label="Weather App - UI Overview" duration="0">
         <h3 is-upgraded>UI Components</h3>
-<p>Our Primary View will contain 2 Subviews.</p>
+<p>Our Primary View will contain 2 subviews.</p>
 <ul>
 <li>Current Weather view</li>
-<li>Table View with 10 days weather forecast, <strong>which will not be part of this tutorial.</strong></li>
+<li>Table View with 10 day weather forecast, <strong>which will not be part of this tutorial.</strong></li>
 </ul>
 <p class="image-container"><img alt="WeatherApp Subviews" src="img/bc5e422b731ea0be.png"></p>
 <h3 is-upgraded>Current Weather view</h3>
-<p>Will be consisted of 2 parts</p>
+<p>Will be consisted of 2 parts:</p>
 <ul>
 <li><strong>Part 1</strong> - General Info  <ul>
 <li>Current date</li>
@@ -129,13 +129,13 @@
 <h3 is-upgraded>Constraints</h3>
 <p>From <a href="https://www.avanderlee.com/swift/auto-layout-programmatically/" target="_blank">SwiftLee</a> - Auto Layout constraints allow us to create views that dynamically adjust to different size classes and positions. The constraints will make sure that your views adjust to any size changes without having to manually update frames or positions</p>
 <h3 is-upgraded>UIStackview</h3>
-<p>From <a href="https://developer.apple.com/documentation/uikit/uistackview" target="_blank">apple.com</a> - Stack views let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device&#39;s orientation, screen size, and any changes in the available space. The stack view manages the layout of all the views in its arrangedSubviews property. These views are arranged along the stack view&#39;s axis, based on their order in the arrangedSubviews array. The exact layout varies depending on the stack view&#39;s axis, distribution, alignment, spacing, and other properties. <img alt="Stack view - Apple developer" src="img/580d5a03d8d3c6d1.png"></p>
+<p>From <a href="https://developer.apple.com/documentation/uikit/uistackview" target="_blank">apple.com</a> - Stackviews let you leverage the power of Auto Layout, creating user interfaces that can dynamically adapt to the device&#39;s orientation, screen size, and any changes in the available space. The stack view manages the layout of all the views in its arranged subviews property. These views are arranged along the stack view&#39;s axis, based on their order in the arranged subviews array. The exact layout varies depending on the stack view&#39;s axis, distribution, alignment, spacing, and other properties. <img alt="Stack view - Apple developer" src="img/580d5a03d8d3c6d1.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Creating the basic view" duration="0">
-        <p>As seen in the image capture below, <strong>Current Weather View</strong> and <strong>Weather Forecast (table) view</strong> are two separate views in the view hold by the view controller.</p>
+        <p>As seen in the image capture below, <strong>Current Weather View</strong> and <strong>Weather Forecast (table) view</strong> are two separate views in the view held by the view controller.</p>
 <p><img alt="WeatherApp Subviews" title="Current Weather View and Forecast Table View" src="img/bc5e422b731ea0be.png"><br> We&#39;ll create this view and later pile up our detailed UI Elements.</p>
 <p>We&#39;re basically going to add the blue view, holding our detailed UI Elements as in the 3D capture below. <img alt="Current Weather 3D Capture" title="Current Weather 3D Capture" src="img/bb87a7126996f47.png"></p>
 <p>In order to do so, follow these steps:</p>
@@ -151,11 +151,11 @@
 </li>
 </ol>
 <h2 is-upgraded>Setting our view constraints</h2>
-<p><strong>Before we continue, follow the steps below. These steps will help us differentiating the view we&#39;ve just created from its parent view:</strong></p>
+<p><strong>Before we continue, follow the steps below. These steps will help us differentiate the view we&#39;ve just created from its parent view:</strong></p>
 <ul>
-<li>Go to the view attributes, and set its color to <code>System Teal Color</code>.<br><img alt="Current Weather View Teal Color" title="Current Weather View Teal Color" src="img/96ed9caf91abdc96.png"></li>
-<li>change the View name to a meaningful name such as <code>Current Weather View</code><img alt="Current Weather View Rename" src="img/d518c5e61666de7e.png"></li>
-<li>Run the application and verify your changes.</li>
+<li>Go to the view attributes, and set its color to <code>System Teal Color</code>.<br><img alt="Current Weather View Teal Color" src="img/96ed9caf91abdc96.png"></li>
+<li>Change the view name to a more meaningful name, such as <code>Current Weather View</code>. <img alt="Current Weather View Rename" src="img/d518c5e61666de7e.png"></li>
+<li>Build and Run the application and verify your changes.</li>
 </ul>
 <aside class="warning"><p><strong>Notice</strong>: there&#39;s a red arrow indicating a problem with your view since it has no set of rules,<br><img alt="Missing Constraints" title="Missing Constraints" src="img/f64076e9ce0d8b74.png"><br> In other words we need to <code>Add constraints</code> so <code>Autolayout</code> will figure out where to position the Current weather view.</p>
 </aside>
@@ -165,7 +165,7 @@
 <li>Pin the view to the top, leading and trailing edges.</li>
 <li>Add a height of 300.</li>
 <li>Click on Add 4 New Constraints<br><img alt="Add 4 Constraints" title="Add 4 Constraints" src="img/b47568bbc1c97ff7.png"></li>
-<li>Verify The Missing Constraints error is gone</li>
+<li>Verify the &#34;Missing Constraints&#34; error is gone</li>
 <li>Build and run your app.</li>
 </ul>
 
@@ -178,8 +178,8 @@
 <ul>
 <li>Step 1: In Object Library (<code>+</code> Button) Search For an Image: <img alt="CurrentWeather-Image" src="img/824f0890ca9139fd.png"></li>
 <li>Step 2: Drag the label under the blue view we&#39;ve previously created.</li>
-<li>Step 3: Copy and Paste The Label Twice, so you&#39;ll end up with 3 Labels.</li>
-<li>Step 4: By clicking on the Labels give them meaningful names:  <ul>
+<li>Step 3: Copy and paste The label twice, so you&#39;ll end up with 3 labels.</li>
+<li>Step 4: By clicking on the labels give them more meaningful names:  <ul>
 <li><code>Current Date</code> for the top label</li>
 <li><code>Current Temp</code> for the middle Label</li>
 <li><code>Current Location</code> for the bottom Label</li>
@@ -192,17 +192,17 @@
       </google-codelab-step>
     
       <google-codelab-step label="Creating Current Weather - General Info Stackview" duration="0">
-        <p>As specified in Weather UI overview, the current weather UI will be consisted of two views. Those Views are marked in the image below in red, and green. The red view refers to the General Info View, while the green view refers to the weather description view.</p>
+        <p>As specified in Weather App - UI Overview, the <code>Current Weather</code> UI view will be consisted of two views.<br> Those views are marked in the image below in red, and green. The red view refers to the <code>General Info View</code>, while the green view refers to the <code>Weather Description View</code>.</p>
 <p class="image-container"><img alt="Current Weather View" title="Current Weather View" src="img/7bcaab022afac85c.png"></p>
-<p>Using Stack Views will ease our development process, simplify our constraints logic and will be easier for maintenance if we&#39;ll want to make changes in our UI in the future. Using Stack Views comes naturally as one view, can be &#34;treated&#34; as an array of 3 vertical elements, while the other has 2 vertical elements.</p>
-<aside class="warning"><p>As Stack Views are really confusing in the beginning, play with the different options<br> other than those suggested in the paragraph below, In order to notice the difference.</p>
+<p>Using Stackviews will ease our development process, simplify our constraints logic and will be easier for maintenance if we&#39;ll want to make changes in our UI in the future. Using Stackviews comes naturally as one view, can be &#34;treated&#34; as an array of 3 vertical elements, while the other has 2 vertical elements.</p>
+<aside class="warning"><p>As Stackviews are really confusing in the beginning, play with the different options<br> other than those suggested in the paragraph below, In order to notice the difference.</p>
 </aside>
 <h3 is-upgraded>The Current Weather General Info Stack View Properties</h3>
 <ul>
-<li>Axis - As Our elements are stacked vertically, we&#39;ll choose <code>Vertical</code>.</li>
-<li>Alignment - We&#39;d like our elements to fill the container, we&#39;ll choose <code>Fill</code>.</li>
-<li>Distribution - We&#39;d like our elements to be distributed proportionally by their label size, hence we&#39;ll choose <code>Fill Proportionally</code>.</li>
-<li>Spacing - is redundant here since Our Distribution defines the way the items will be spaced.</li>
+<li><strong>Axis</strong> - As Our elements are stacked vertically, we&#39;ll choose <code>Vertical</code>.</li>
+<li><strong>Alignment</strong> - We&#39;d like our elements to fill the container, we&#39;ll choose <code>Fill</code>.</li>
+<li><strong>Distribution</strong> - We&#39;d like our elements to be distributed proportionally by their label size, hence we&#39;ll choose <code>Fill Proportionally</code>.</li>
+<li><strong>Spacing</strong> - Is redundant here since <strong>Distribution</strong> defines the way the items will be spaced.</li>
 </ul>
 <p class="image-container"><img alt="Info Stack View" src="img/dc5c5cf42aa35f36.png"></p>
 
@@ -217,7 +217,7 @@
 <li>Step 2: Drag the image under the blue view we&#39;ve previously created.</li>
 <li>Step 3: In Object Library (<code>+</code> Button) Search For a Label: <img alt="CurrentWeather-Label" src="img/824f0890ca9139fd.png"></li>
 <li>Step 4: Drag the label under the blue view we&#39;ve previously created.</li>
-<li>Step 5: By clicking on the Items give them meaningful names:  <ul>
+<li>Step 5: By clicking on the items give them more meaningful names:  <ul>
 <li><code>Description Image</code> for the Image</li>
 <li><code>Description Label</code> for the middle Label</li>
 </ul>
@@ -229,7 +229,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Creating Current Weather - Description Stackview" duration="0">
-        <h3 is-upgraded>Current Weather Description Stack View properties</h3>
+        <h3 is-upgraded>Current Weather Description Stackview properties</h3>
 <ul>
 <li>Axis - As our elements are stacked vertically, we&#39;ll choose <code>Vertical</code>.</li>
 <li>Alignment - We&#39;d like our elements to be in the Center of the container, we&#39;ll choose <code>Center</code>.</li>
@@ -264,7 +264,7 @@
 </ul>
 </li>
 <li>Step 2: Add a constrain related to the Info stack view:  <ul>
-<li>The constrain should reflect that the leading Image Stack View will be 20 pts from the trailing edge of the Info Stack View</li>
+<li>The constrain should reflect that the leading Image Stack View will be 20 pts from the trailing edge of the Info Stackview.</li>
 </ul>
 </li>
 </ul>
@@ -309,9 +309,9 @@
 <p>Follow these steps in order to create our Network Manager file:</p>
 <ol type="1">
 <li>Right click our new group, named <code>Network Manager</code></li>
-<li>Choose New file..</li>
+<li>Choose <code>New File...</code></li>
 <li>Choose <code>Swift</code></li>
-<li>name it <code>NetworkManager.swift</code></li>
+<li>Name it <code>NetworkManager.swift</code></li>
 </ol>
 <h3 is-upgraded>Open Weather API</h3>
 <p>In order to fetch data from the network, we&#39;ll be using open weather api. Feel free to self explore the API, but for now we&#39;ll use the <code>Current Weather API</code> only.</p>
@@ -363,7 +363,6 @@
         ]
 
         return components.url
-
     }
 </code></pre>
 
@@ -452,7 +451,7 @@
 <p>Follow these steps in order to create our Network Manager file:</p>
 <ol type="1">
 <li>Right click our new group, named <code>Model</code></li>
-<li>Choose New file..</li>
+<li>Choose <code>New file...</code></li>
 <li>Choose <code>Swift</code></li>
 <li>Name it <code>CurrentWeather.swift</code></li>
 </ol>
@@ -920,7 +919,7 @@ struct Weather: Decodable {
 </ul>
 <p>Good Luck!</p>
 <h3 is-upgraded>Adding more features</h3>
-<p>In order to complete the app, you can add a table view representing the forecast for the next 10 days. You can also add more screens that will display the user weather in different locations. You can persist the data, You can add a settings button that will change the units to Fahrenheit. You can also</p>
+<p>In order to complete the app, you can add a table view representing the forecast for the next 10 days. You can also add more screens that will display the user weather in different locations. You can persist the data, You can add a settings button that will change the units to Fahrenheit.</p>
 
 
       </google-codelab-step>
