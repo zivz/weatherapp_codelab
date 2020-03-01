@@ -81,7 +81,7 @@ Once the project is created, The project file will appear on the screen.
 
 ![Project Settings](./assets/Project_Settings.png)
 
-##Weather App UI Overview
+##[Weather App UI Overview](#weather-app-ui-overview)
 
 #### UI Components
 Our Primary View will contain 2 subviews.  
