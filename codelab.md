@@ -414,43 +414,6 @@ class NetworkManager {
         }
         task.resume()
     }
-
-    func getForecast(completionHandler: @escaping(Result<DecodedForecasts, WeatherError>) -> Void ) {
-
-        guard let url = EndPoints.forecastURL else {
-            completionHandler(.failure(.invalidURL))
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-
-            if let _ = error {
-                completionHandler(.failure(.unableToComplete))
-                return
-            }
-
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completionHandler(.failure(.unableToComplete))
-                return
-            }
-
-            guard let data = data else {
-                completionHandler(.failure(.invalidData))
-                return
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .secondsSince1970
-                let forecasts = try decoder.decode(DecodedForecasts.self, from: data)
-                completionHandler(.success(forecasts))
-            } catch {
-                completionHandler(.failure(.invalidData))
-            }
-
-        }
-        task.resume()
-    }
 }
 ```
 
@@ -474,6 +437,25 @@ func getCurrentWeather(completionHandler: @escaping (Result<CurrentWeather, Weat
 
 }
 ```
+
+##### Understanding the completionHandler
+completionHandler is a closure. Think about it as it was declared as:
+```Swift
+let completionHandler:(ParamaterTypes) -> ReturnType = { (parameterName: ParamterType) in
+
+}```
+
+In our case, our `ParamaterTypes` is `Result<CurrentWeather, WeatherError>` and `ReturnType` is `Void`.
+
+Another way of understanding the completionHandler, is by getting the full picture of how we are going to operate it.
+Calling to `getCurrentWeather` will look as so:
+```Swift
+NetworkManager.shared.getCurrentWeather{ **This is where the completionHandler is used** result in
+  switch result {
+    case .success:
+    case .failure:
+  }
+}```
 
 Notice that we're using our CurrentWeather, and WeatherError as the success and failure cases.
 We'll create the `Current Weather` model and `WeatherError` very soon.
