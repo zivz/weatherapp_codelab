@@ -312,7 +312,7 @@ In order to get the current weather, there are several options:
 * Get the weather by zip code
 
 Resources:
-* <a href="https://github.com/zivz/weatherapp_codelab/raw/master/resources/Weather.postman_collection.json" download>Download Postman Collection</a>
+* <a href="https://github.com/zivz/weatherapp_codelab/raw/master/resources/Weather.postman_collection.zip" download>Download Postman Collection</a>
 
 #### Getting weather by geographic coordinates
 As specified in [Current Weather API](https://openweathermap.org/current)  
