@@ -365,13 +365,96 @@ private struct EndPoints {
 
         return components.url
     }
+}
 ```
 
 ## Preparing our Network Manager - Part 2
 Will now create our Network Manager, the Network Manager is a singleton.
 
-#### Create our singleton
-Copy these lines of code, under our EndPoints structure.
+####NetworkManager Class Code
+Copy the code below, under the closing brace of `Struct EndPoints` and we'll walk through it step-by-step
+```Swift
+class NetworkManager {
+    static let shared = NetworkManager()
+    private init() {}
+
+    func getCurrentWeather(completionHandler: @escaping (Result<CurrentWeather, WeatherError>) -> Void ) {
+
+        guard let url = EndPoints.currentWeatherURL else {
+            completionHandler(.failure(.invalidURL))
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+            if error != nil {
+                completionHandler(.failure(.unableToComplete))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completionHandler(.failure(.unableToComplete))
+                return
+            }
+
+            guard let data = data else {
+                completionHandler(.failure(.invalidData))
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let decodedWeather = try decoder.decode(DecodedWeather.self, from: data)
+                let currentWeather = CurrentWeather(weather: decodedWeather)
+                completionHandler(.success(currentWeather))
+            } catch {
+                completionHandler(.failure(.invalidData))
+            }
+
+        }
+        task.resume()
+    }
+
+    func getForecast(completionHandler: @escaping(Result<DecodedForecasts, WeatherError>) -> Void ) {
+
+        guard let url = EndPoints.forecastURL else {
+            completionHandler(.failure(.invalidURL))
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+            if let _ = error {
+                completionHandler(.failure(.unableToComplete))
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completionHandler(.failure(.unableToComplete))
+                return
+            }
+
+            guard let data = data else {
+                completionHandler(.failure(.invalidData))
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .secondsSince1970
+                let forecasts = try decoder.decode(DecodedForecasts.self, from: data)
+                completionHandler(.success(forecasts))
+            } catch {
+                completionHandler(.failure(.invalidData))
+            }
+
+        }
+        task.resume()
+    }
+}
+```
+
+#### Creating NetworkManager as a singleton
 ```swift
 class NetworkManager {
   static let shared = NetworkManager()
@@ -386,7 +469,6 @@ Our network call will not get any outside parameters, but rather be using our lo
 We'll use the enumeration to capture information about whether an asynchronous call succeeds or fails, and use the associated values for the `Result.success(_:)` and `Result.failure(_:)` cases to carry information about the result of the call.
 To read more about using result, I've found [this article](https://www.hackingwithswift.com/articles/161/how-to-use-result-in-swift) very helpful.
 
-Go ahead and declare our function under `private init() {}` declaration.
 ```Swift
 func getCurrentWeather(completionHandler: @escaping (Result<CurrentWeather, WeatherError>) -> Void ) {
 
@@ -399,9 +481,7 @@ We'll create the `Current Weather` model and `WeatherError` very soon.
 #### Creating our data task
 Our data task, which will handle the api call will be consisted from constructing the url, firing the request and handling the response.
 
-Let's create the url
-
-in our function, copy and paste these lines of code:
+Creating the url:
 ```Swift
 guard let url = EndPoints.currentWeatherURL else {
     completionHandler(.failure(.invalidURL))
@@ -417,8 +497,6 @@ Let's fire our task, will be using URLSession.
 URLSession provides and API for downloading data from and uploading data to endpoints indicated by URLs.
 You can read more about URLSession [here](https://developer.apple.com/documentation/foundation/urlsession), [here](https://www.raywenderlich.com/3244963-urlsession-tutorial-getting-started) and [here](https://learnappmaking.com/urlsession-swift-networking-how-to/)
 
-under our guard statement, copy and paste this line of code
-
 ```Swift
 let task = URLSession.shared.dataTask(with: url) { data, response, error in
 
@@ -430,9 +508,9 @@ We now see that our dataTask, using the url we've created, the completionHandler
 #### Handling the error  
 error means there was a transport error, either by sending the request, or receiving the response.
 
-to handle the error copy and paste these lines of code:
+Handling the error:
 ```Swift
-if let _ = error {
+if error != nil {
     completionHandler(.failure(.unableToComplete))
     return
 }
@@ -440,7 +518,7 @@ if let _ = error {
 
 #### Handling the response
 We're expecting for response code of 200, so any other response code will indicate us an error.
-to handle responses other than 200, copy and paste these lines of code:
+To handle responses other than 200 we'll guard the response **and** the status code.
 ```Swift
 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
     completionHandler(.failure(.unableToComplete))
@@ -450,7 +528,7 @@ guard let response = response as? HTTPURLResponse, response.statusCode == 200 el
 
 ####Handling our data
 We're expecting for data, so we'll again handle the case we don't get any data.
-to handle corrupted data, copy and paste these lines of code:
+To handle corrupted data, we'll guard the data:
 ```Swift
 guard let data = data else {
     completionHandler(.failure(.invalidData))
@@ -462,7 +540,6 @@ We'll be using JSONDecoder, since our data will be serialized to JSON,
 Then we'd like to parse our JSON into an object, which will be our DecodedWeather structure.
 We'll then map for our own convenience DecodedWeather to CurrentWeather which will contain the data in the structure we want.
 
-go ahead and copy these lines of code under data closing braces:
 ```Swift
 do {
     let decoder = JSONDecoder()
