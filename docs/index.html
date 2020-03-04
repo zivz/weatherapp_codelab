@@ -438,29 +438,22 @@
 <p>completionHandler is a closure. Think about it as it was declared as:</p>
 <pre><code>let completionHandler:(ParamaterTypes) -&gt; ReturnType = { (parameterName: ParamterType) in
 
-}```
-
-In our case, our `ParamaterTypes` is `Result&lt;CurrentWeather, WeatherError&gt;` and `ReturnType` is `Void`.
-
-Another way of understanding the completionHandler, is by getting the full picture of how we are going to operate it.
-Calling to `getCurrentWeather` will look as so:
-```Swift
-NetworkManager.shared.getCurrentWeather{ **This is where the completionHandler is used** result in
+}
+</code></pre>
+<p>In our case, our <code>ParamaterTypes</code> is <code>Result&lt;CurrentWeather, WeatherError&gt;</code> and <code>ReturnType</code> is <code>Void</code>.</p>
+<p>Another way of understanding the completionHandler, is by getting the full picture of how we are going to operate it. Calling to <code>getCurrentWeather</code> will look as so:</p>
+<pre><code>NetworkManager.shared.getCurrentWeather{ **This is where the completionHandler is used** result in
   switch result {
     case .success:
     case .failure:
   }
-}```
-
-Notice that we&#39;re using our CurrentWeather, and WeatherError as the success and failure cases.
-We&#39;ll create the `Current Weather` model and `WeatherError` very soon.
-
-#### Creating our data task
-Our data task, which will handle the api call will be consisted from constructing the url, firing the request and handling the response.
-
-Creating the url:
-```Swift
-guard let url = EndPoints.currentWeatherURL else {
+}
+</code></pre>
+<p>Notice that we&#39;re using our CurrentWeather, and WeatherError as the success and failure cases. We&#39;ll create the <code>Current Weather</code> model and <code>WeatherError</code> very soon.</p>
+<h3 is-upgraded>Creating our data task</h3>
+<p>Our data task, which will handle the api call will be consisted from constructing the url, firing the request and handling the response.</p>
+<p>Creating the url:</p>
+<pre><code>guard let url = EndPoints.currentWeatherURL else {
     completionHandler(.failure(.invalidURL))
     return
 }

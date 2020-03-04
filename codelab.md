@@ -443,7 +443,8 @@ completionHandler is a closure. Think about it as it was declared as:
 ```Swift
 let completionHandler:(ParamaterTypes) -> ReturnType = { (parameterName: ParamterType) in
 
-}```
+}
+```
 
 In our case, our `ParamaterTypes` is `Result<CurrentWeather, WeatherError>` and `ReturnType` is `Void`.
 
@@ -455,7 +456,8 @@ NetworkManager.shared.getCurrentWeather{ **This is where the completionHandler i
     case .success:
     case .failure:
   }
-}```
+}
+```
 
 Notice that we're using our CurrentWeather, and WeatherError as the success and failure cases.
 We'll create the `Current Weather` model and `WeatherError` very soon.
