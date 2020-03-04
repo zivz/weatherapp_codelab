@@ -81,7 +81,7 @@ Once the project is created, The project file will appear on the screen.
 
 ![Project Settings](./assets/Project_Settings.png)
 
-##Weather App UI Overview
+##[Weather App UI Overview](#weather-app-ui-overview)
 
 #### UI Components
 Our Primary View will contain 2 subviews.  
@@ -187,7 +187,7 @@ Follow these steps in order to add the items:
 
 ## Creating Current Weather - General Info Stackview
 
-As specified in `Weather App - UI Overview`, the `Current Weather` UI view will be consisted of two views.  
+As specified in [Weather App - UI Overview](#weather-app-ui-overview), the `Current Weather` UI view will be consisted of two views.  
 Those views are marked in the image below in <font color="red">red</font>, and <font color="green">green</font>.
 The red view refers to the `General Info View`, while the green view refers to the `Weather Description View`.
 
@@ -310,6 +310,9 @@ In order to get the current weather, there are several options:
 * Get the weather by city id
 * Get the weather by geographic coordinates. **This is the request we'll be using**
 * Get the weather by zip code
+
+Resources:
+* <a href="https://github.com/zivz/weatherapp_codelab/raw/master/resources/Weather.postman_collection.json" download>Download Postman Collection</a>
 
 #### Getting weather by geographic coordinates
 As specified in [Current Weather API](https://openweathermap.org/current)  
