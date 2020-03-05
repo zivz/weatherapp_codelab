@@ -107,13 +107,13 @@ Will be consisted of 2 parts:
 In this section we'll get familiar with some terms related to UI in Xcode.
 
 #### Storyboard
-From [raywanderlich.com](https://www.raywenderlich.com/5055364-ios-storyboards-getting-started) - Storyboards are an exciting feature first introduced in iOS 5, which save time building user interfaces for your apps. Storyboards allow you to prototype and design multiple view controller views within one file, and also let you create transitions between view controllers.
+From [raywenderlich.com](https://www.raywenderlich.com/5055364-ios-storyboards-getting-started) - Storyboards are an exciting feature first introduced in iOS 5, which save time building user interfaces for your apps. Storyboards allow you to prototype and design multiple view controller views within one file, and also let you create transitions between view controllers.
 
 From [apple.com](https://developer.apple.com/library/archive/documentation/General/Conceptual/Devpedia-CocoaApp/Storyboard.html) - A storyboard is a visual representation of the user interface of an iOS application, showing screens of content and the connections between those screens.
 
 #### Autolayout
 
-From [raywanderlich.com](https://www.raywenderlich.com/811496-auto-layout-tutorial-in-ios-getting-started) - At first, Apple made one screen size for the iPhone. Developers didn’t have to create flexible interfaces as they only had to fit that one size. Today, differently sized devices and more emphasis on landscape mode demand user interfaces of different sizes. Auto Layout is Apple’s solution to this problem, enabling UI elements to grow, shrink and move depending on screen size. Auto Layout makes it easy to support different screen sizes in your apps.
+From [raywenderlich.com](https://www.raywenderlich.com/811496-auto-layout-tutorial-in-ios-getting-started) - At first, Apple made one screen size for the iPhone. Developers didn’t have to create flexible interfaces as they only had to fit that one size. Today, differently sized devices and more emphasis on landscape mode demand user interfaces of different sizes. Auto Layout is Apple’s solution to this problem, enabling UI elements to grow, shrink and move depending on screen size. Auto Layout makes it easy to support different screen sizes in your apps.
 
 #### Constraints
 
@@ -284,7 +284,7 @@ In our case, we'll not have any user-interaction, but instead request for data f
 ![MVC Diagram](./assets/MVC-Diagram.png)
 
 Resources:
-* [raywanderlich.com](https://www.raywenderlich.com/1000705-model-view-controller-mvc-in-ios-a-modern-approach)
+* [raywenderlich.com](https://www.raywenderlich.com/1000705-model-view-controller-mvc-in-ios-a-modern-approach)
 * [learnappmaking.com](https://learnappmaking.com/model-view-controller-mvc-swift/)  
 
 ## Preparing our Network Manager - Part 1
